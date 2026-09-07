@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}404 — Page Not Found{% endblock %}
+{% block content %}
+<div style="min-height:70vh;display:flex;align-items:center;justify-content:center;padding:60px 20px;">
+  <div style="text-align:center;max-width:540px;">
+    <div style="font-size:5rem;color:var(--blue);opacity:.25;font-family:var(--font-title);font-weight:900;line-height:1;">404</div>
+    <h1 style="font-family:var(--font-title);font-size:2.4rem;font-weight:900;text-transform:uppercase;margin-bottom:12px;">Page Not Found</h1>
+    <p style="color:var(--mid-gray);margin-bottom:32px;line-height:1.7;">The page you're looking for may have been moved or removed. Use the navigation above or go back to the home page.</p>
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+      <a href="{% url 'home' %}" class="btn-primary"><i class="bi bi-house-fill"></i> Go to Home</a>
+      <a href="{% url 'news' %}" class="btn-black"><i class="bi bi-newspaper"></i> Read News</a>
+      <a href="{% url 'contact' %}" class="btn-outline-blue"><i class="bi bi-envelope"></i> Contact Us</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

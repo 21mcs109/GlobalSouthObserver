@@ -1,0 +1,165 @@
+{% extends 'base.html' %}
+{% block title %}Contact Us{% endblock %}
+
+{% block content %}
+<div class="page-hero">
+  <div class="container">
+    <h1 class="page-hero-title"><span>Contact</span> Us</h1>
+    <p class="page-hero-subtitle">Write for Us &bull; Email &bull; Website &bull; Social Media</p>
+  </div>
+</div>
+
+<nav class="sub-navbar" aria-label="Contact sections">
+  <div class="sub-navbar-inner">
+    {% for sec in contact_sections %}
+    <button class="sub-nav-btn {% if forloop.first %}active{% endif %}" data-target="{{ sec.id }}">{{ sec.label }}</button>
+    {% endfor %}
+  </div>
+</nav>
+
+<div class="container">
+
+  <!-- Write for Us -->
+  <section class="content-section" id="write-for-us">
+    <h2>Write for Us</h2>
+    <div class="two-col">
+      <div>
+        <p>Global South Observer (GSO) invites academicians, researchers, civil servants, industry experts, and informed citizens to contribute their perspectives, research findings, and analysis to our platform. We publish scholarly articles, commentaries, opinion pieces, book reviews, and policy analyses on all aspects of Global South affairs.</p>
+        <h3>What We Publish</h3>
+        <ul>
+          <li>Research articles on international relations, geopolitics, security, military strategic affairs</li>
+          <li>Modern warfare &amp; defence technologies analysis</li>
+          <li>Public policy &amp; world governance commentary</li>
+          <li>SDGs, philosophy, science and entertainment pieces</li>
+          <li>Healthcare, biodiversity, blue economy and clean energy articles</li>
+          <li>Book reviews and critical analyses</li>
+        </ul>
+        <h3>Submission Guidelines</h3>
+        <ul>
+          <li>Articles should be <strong>1200 to 2000 words</strong>, line space 1.5, Times New Roman font</li>
+          <li>Include an <strong>80-word author bio</strong> and passport-size photo</li>
+          <li>All claims must have <strong>references, bibliographies and hyperlinked citations</strong></li>
+          <li>Must be <strong>original</strong> — no AI-generated content permitted</li>
+          <li>Must be <strong>free from plagiarism</strong> and comply with copyright laws</li>
+          <li>Submit as a Word document to: <a href="mailto:contactglobalsouthobserver@gmail.com">contactglobalsouthobserver@gmail.com</a></li>
+        </ul>
+      </div>
+      <div class="form-card">
+        <h3><i class="bi bi-send-fill"></i> Send a Message</h3>
+        {% if messages %}{% for m in messages %}<div class="alert alert-{{ m.tags }}" style="margin-bottom:14px;"><i class="bi bi-check-circle-fill"></i> {{ m }}</div>{% endfor %}{% endif %}
+        <form method="POST" action="{% url 'contact' %}" class="styled-form" novalidate>
+          {% csrf_token %}
+          {% for field in form %}
+          <div class="form-group">
+            <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
+            {{ field }}
+            {% if field.errors %}<div class="field-error">{% for e in field.errors %}<span>{{ e }}</span>{% endfor %}</div>{% endif %}
+          </div>
+          {% endfor %}
+          <button type="submit" class="btn-primary btn-full"><i class="bi bi-send"></i> Send Message</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Email -->
+  <section class="content-section" id="email">
+    <h2>Email ID</h2>
+    <div class="three-col">
+      <div class="service-card" data-animate>
+        <div class="icon"><i class="bi bi-envelope-fill"></i></div>
+        <h3>General Enquiries</h3>
+        <p>For all general enquiries, article submissions, membership and subscription questions.</p>
+        <a href="mailto:contactglobalsouthobserver@gmail.com" style="font-family:var(--font-ui);font-size:.82rem;font-weight:700;color:var(--blue);display:inline-flex;align-items:center;gap:6px;margin-top:10px;word-break:break-all;"><i class="bi bi-envelope"></i> contactglobalsouthobserver@gmail.com</a>
+      </div>
+      <div class="service-card" data-animate>
+        <div class="icon"><i class="bi bi-pencil-square"></i></div>
+        <h3>Article Submissions</h3>
+        <p>Send your research articles, commentaries, book reviews and opinion pieces for editorial review.</p>
+        <a href="mailto:contactglobalsouthobserver@gmail.com" style="font-family:var(--font-ui);font-size:.82rem;font-weight:700;color:var(--blue);display:inline-flex;align-items:center;gap:6px;margin-top:10px;"><i class="bi bi-envelope"></i> contactglobalsouthobserver@gmail.com</a>
+      </div>
+      <div class="service-card" data-animate>
+        <div class="icon"><i class="bi bi-briefcase-fill"></i></div>
+        <h3>Partnerships &amp; MOUs</h3>
+        <p>For academic institutions, universities, industry, and civil society organisations interested in partnership.</p>
+        <a href="mailto:contactglobalsouthobserver@gmail.com" style="font-family:var(--font-ui);font-size:.82rem;font-weight:700;color:var(--blue);display:inline-flex;align-items:center;gap:6px;margin-top:10px;"><i class="bi bi-envelope"></i> contactglobalsouthobserver@gmail.com</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Website -->
+  <section class="content-section" id="website">
+    <h2>Website Link</h2>
+    <p>Visit and share our platform across your networks to help us reach more readers and researchers across the Global South.</p>
+    <div class="info-box">
+      <h4>Official Website</h4>
+      <p><a href="/" style="font-size:1rem;font-weight:700;">www.globalsouthobserver.com</a></p>
+    </div>
+    <div class="info-box" style="margin-top:16px;">
+      <h4>YouTube Channel</h4>
+      <p><a href="https://www.youtube.com/@GlobalSouthObserver-z4y" target="_blank" rel="noopener">youtube.com/@GlobalSouthObserver-z4y</a> — Subscribe for podcast episodes, seminars, and video content.</p>
+    </div>
+    <div class="info-box" style="margin-top:16px;">
+      <h4>LinkedIn Group</h4>
+      <p><a href="https://www.linkedin.com/groups/40128007/" target="_blank" rel="noopener">linkedin.com/groups/40128007/</a> — Join our professional community on LinkedIn.</p>
+    </div>
+  </section>
+
+  <!-- Social Media -->
+  <section class="content-section" id="social">
+    <h2>Social Media</h2>
+    <p>Follow Global South Observer on all major social media platforms to stay updated with our latest publications, research briefs, event announcements, and news analysis.</p>
+    <div class="three-col" style="margin-top:24px;">
+      <a href="https://www.facebook.com/" target="_blank" rel="noopener" style="text-decoration:none;">
+        <div class="service-card" data-animate style="text-align:center;">
+          <div class="icon"><i class="bi bi-facebook"></i></div>
+          <h3>Facebook</h3>
+          <p>Like and follow our Facebook page for daily updates and article shares.</p>
+          <span style="font-family:var(--font-ui);font-size:.75rem;color:var(--blue);font-weight:700;">Follow on Facebook →</span>
+        </div>
+      </a>
+      <a href="https://www.youtube.com/@GlobalSouthObserver-z4y" target="_blank" rel="noopener" style="text-decoration:none;">
+        <div class="service-card" data-animate style="text-align:center;">
+          <div class="icon"><i class="bi bi-youtube"></i></div>
+          <h3>YouTube</h3>
+          <p>Subscribe to our YouTube channel for podcast episodes and recorded seminars.</p>
+          <span style="font-family:var(--font-ui);font-size:.75rem;color:var(--blue);font-weight:700;">@GlobalSouthObserver-z4y →</span>
+        </div>
+      </a>
+      <a href="https://www.linkedin.com/groups/40128007/" target="_blank" rel="noopener" style="text-decoration:none;">
+        <div class="service-card" data-animate style="text-align:center;">
+          <div class="icon"><i class="bi bi-linkedin"></i></div>
+          <h3>LinkedIn</h3>
+          <p>Join our LinkedIn group for professional networking and research discussions.</p>
+          <span style="font-family:var(--font-ui);font-size:.75rem;color:var(--blue);font-weight:700;">Join Group →</span>
+        </div>
+      </a>
+      <a href="https://www.instagram.com/globalsouthobserver/" target="_blank" rel="noopener" style="text-decoration:none;">
+        <div class="service-card" data-animate style="text-align:center;">
+          <div class="icon"><i class="bi bi-instagram"></i></div>
+          <h3>Instagram</h3>
+          <p>Follow us on Instagram for visual content, infographics, and research highlights.</p>
+          <span style="font-family:var(--font-ui);font-size:.75rem;color:var(--blue);font-weight:700;">@globalsouthobserver →</span>
+        </div>
+      </a>
+      <a href="https://x.com/globalsouthobsr" target="_blank" rel="noopener" style="text-decoration:none;">
+        <div class="service-card" data-animate style="text-align:center;">
+          <div class="icon"><i class="bi bi-twitter-x"></i></div>
+          <h3>X (Twitter)</h3>
+          <p>Follow us on X for real-time news updates, commentary, and research announcements.</p>
+          <span style="font-family:var(--font-ui);font-size:.75rem;color:var(--blue);font-weight:700;">@globalsouthobsr →</span>
+        </div>
+      </a>
+      <a href="https://chat.whatsapp.com/C6cLmw72c8KI2cx3gUOkaT" target="_blank" rel="noopener" style="text-decoration:none;">
+        <div class="service-card" data-animate style="text-align:center;">
+          <div class="icon"><i class="bi bi-whatsapp"></i></div>
+          <h3>WhatsApp</h3>
+          <p>Join our WhatsApp community for direct updates, discussions, and announcements.</p>
+          <span style="font-family:var(--font-ui);font-size:.75rem;color:var(--blue);font-weight:700;">Join WhatsApp Group →</span>
+        </div>
+      </a>
+    </div>
+  </section>
+
+</div>
+{% endblock %}

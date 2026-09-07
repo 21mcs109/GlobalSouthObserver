@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% block title %}Political Consultancy{% endblock %}
+
+{% block content %}
+<div class="page-hero">
+  <div class="container">
+    <h1 class="page-hero-title"><span>Political</span> Consultancy</h1>
+    <p class="page-hero-subtitle">Research &bull; Communication &bull; Election Strategy &bull; Data Analysis</p>
+  </div>
+</div>
+
+<nav class="sub-navbar" aria-label="Political consultancy sections">
+  <div class="sub-navbar-inner">
+    {% for sec in political_sections %}
+    <button class="sub-nav-btn {% if forloop.first %}active{% endif %}" data-target="{{ sec.id }}">{{ sec.label }}</button>
+    {% endfor %}
+  </div>
+</nav>
+
+<div class="container">
+
+  <section class="content-section" id="research">
+    <h2>Political Research &amp; Public Opinion</h2>
+    <p>Global South Observer (GSO) platform provides <strong>strategic advice, research, communication support, campaign planning, and organizational guidance to political parties, candidates, elected representatives, public officials, advocacy for government and private sector organizations</strong>, and other stakeholders from community. Our Political consultants use research, data analysis, communication strategies, public-opinion studies, and organizational planning to help clients and emerging leaders from various fields to understand socio-political and economic environments and make value added informed decisions. It combines knowledge from <strong>political science, public policy, sociology, history, communication, economics, psychology, statistics, media studies, and management.</strong></p>
+    <p>Global South Observer (GSO) team will do proper research, survey and opinion polls on emerging issues in the global south societies. We believe that the foundations of political consultancy is authentic research based data and analysis. Our team collects data and analyzes information various online and offline sources about <strong>political, economic, social, cultural, psychology and statistics</strong> basis to help clients understand the environment in which they operate or lead the community.</p>
+    <h3>Our Research Work May Include</h3>
+    <ul>
+      <li>GSO team will examine changing <strong>socio-political and economic new phenomenon</strong> in global south countries. We will explore political culture, political development and political decay's issues in the global south countries including <strong>governance deficit, democratic process and welfare issues</strong> in the global south societies.</li>
+      <li>Our team will conduct data based research on <strong>public attitudes, opinions, trends and issues</strong>, identifying important political and policy implementation issues in global south societies.</li>
+      <li>This platform will help our clients to develop <strong>effective political communication and strategies</strong> to Improving communication between political organizations and the general public.</li>
+      <li>We also offer campaign strategies and organizational planning, <strong>evidence-based strategic advice, assisting individual and all stakeholders' engagement</strong> to increase public relations through print media and social media platforms.</li>
+      <li>Understanding <strong>public attitudes, orientations and changing voter behavior</strong> is an important part of political consulting. Our consultants may use <strong>surveys, interviews, focus groups</strong>, and other research methods to study people's views about issues, policies, institutions, and political communication.</li>
+      <li>Our team will focus on research related to <strong>public-opinion on major issues, events and new emerging phenomena</strong> and their concerns among different groups. The public opinion surveys and research may include the study of public elected <strong>policy issues, good governance and governance deficit issues, changes in public attitudes and opinion over time</strong> and major Issues which require greater public engagement time to time in the global south societies.</li>
+    </ul>
+  </section>
+
+  <section class="content-section" id="social-media">
+    <h2>Social Media &amp; Political Communication</h2>
+    <p>Global South Observer (GSO) platform provides Political consultants may advise clients on interactions with <strong>traditional and digital media communications</strong>. This can include preparing <strong>spokespersons, organizing press briefings, developing media strategies, and responding to public issues.</strong> Media training may help political representatives communicate clearly during interviews, press conferences, debates, and public events.</p>
+    <p>Our team consultants will also trained our clients to prioritize factual communication and avoid misleading claims, fabricated information, or manipulative practices. The platform will trained our clients to use digital platforms such as <strong>websites, social-media platforms, digital advertising, email communication, online events, and other digital tools</strong> to communicate with the public.</p>
+    <p>It may further include the training related to <strong>digital communication strategy, website content planning, social-media management, audience poll &amp; analysis, online digital engagement, digital campaign &amp; content development</strong>. It may also comply with relevant laws, platform rules, privacy requirements, and advertising standards including election regulations.</p>
+    <p>We believe that political communication is central to political consultancy. Today's world <strong>individuals, academic institutions, civil organizations, political organizations and industries</strong> need to communicate policies, ideas, positions, and priorities to different audiences. Hence, our consultants may assist with speech preparation, presentation strategy, public statements, press communication, policy communication, media engagement, public information materials, digital communication &amp; planning etc.</p>
+    <div class="three-col" style="margin-top:24px;">
+      <div class="service-card" data-animate><div class="icon"><i class="bi bi-megaphone-fill"></i></div><h3>Media Strategy</h3><p>Preparing spokespersons, organizing press briefings, developing media strategies and responding to public issues.</p></div>
+      <div class="service-card" data-animate><div class="icon"><i class="bi bi-phone-fill"></i></div><h3>Digital Campaign</h3><p>Social-media management, content development, audience analysis, and digital communication planning.</p></div>
+      <div class="service-card" data-animate><div class="icon"><i class="bi bi-mic-fill"></i></div><h3>Communication Training</h3><p>Speech preparation, presentation strategy, public statements, and press conference management.</p></div>
+    </div>
+  </section>
+
+  <section class="content-section" id="election">
+    <h2>Election Strategy &amp; Campaigns</h2>
+    <p><strong>Global South Observer (GSO)</strong> platform provides services related to campaign consultancy involves providing <strong>strategic and organizational advice</strong> during political campaigns. Our campaign consultant may assist with <strong>planning, research, communication, scheduling, resource allocation, volunteer coordination, and evaluation.</strong> Campaign consulting generally involves developing a structured plan based on the <strong>campaign's objectives, available resources, legal requirements, political environment, and communication needs.</strong></p>
+    <h3>Our Services Include</h3>
+    <ul>
+      <li><strong>Study of Constituency Demographics &amp; Voter Composition:</strong> It will include analysis on voting behavior, voting patterns by booth, ward, village, locality and different states and country wise in the global south region. It will include Identify key issues affecting voter's behavior, Map's representation in strongholds, weak areas, and swing areas.</li>
+      <li><strong>Candidate Assessment &amp; Positioning:</strong> Our team will assess the candidate's behavior, their campaign strategy and study opponent candidate popularity, credibility, accessibility, and organizational strengths, weaknesses, and public perception. We will help to build a consistent narrative around leadership, development, or public service.</li>
+      <li><strong>Campaign Strategy:</strong> Our platform will provide clear campaign objectives and measurable targets to concerns. We will provide segment voters based on legitimate, relevant factors such as geography and public policy, constituency-specific messaging around issues, prepare an election calendar and campaign roadmap.</li>
+      <li><strong>Voter Outreach:</strong> Our team will guide candidates to coordinate rallies, public meetings, door-to-door outreach, and community engagement effective and coordinator manner. Along with it conduct structured field surveys and public consultations, Identify major Street and local issues through listening exercises, organize meetings with residents to establish systematic volunteer and field-worker networks.</li>
+      <li><strong>Digital &amp; Social Media Strategy:</strong> Develop an official social-media presence, Create content calendars for different campaign stages. Use videos, infographics, interviews, and issue explainers, monitor public engagement and sentiment, respond to misinformation with factual corrections, build relationships with local and regional media, prepare press releases and media briefs, arrange interviews and press conferences, monitor news coverage, ensure rapid, factual responses to major issues.</li>
+    </ul>
+  </section>
+
+  <section class="content-section" id="survey">
+    <h2>Election Survey &amp; Data Analysis</h2>
+    <p>An election survey is an important tool for understanding voters' opinions, priorities, and expectations before an election. The Global South Observer (GSO) provides insights into the issues influencing <strong>voter's behavior and helps present a broader picture of public sentiment</strong>. Hence, our team does proper election survey to understand voter preferences and major election issues inducing examine the factors such as <strong>candidate preference, political priorities, development, employment, education, healthcare, infrastructure</strong>, and other issues that may influence voting decisions.</p>
+    <p>This platform will help to identify key influencing areas during elections such as <strong>employment opportunities, inflation, education, healthcare, roads, public services, and governance issues.</strong> Therefore, our team will do pre and post election surveys compare campaign objectives with actual results.</p>
+    <ul>
+      <li>Our team will provide data analysis services such as <strong>organize surveys related demographic, electoral voters and survey on socio-economic condition</strong> of masses.</li>
+      <li>This platform will collect data which may help to <strong>identify patterns, compare trends, evaluate communication efforts and strategic decision-making.</strong></li>
+      <li>At the same time, our consultants will also recognize the <strong>limitations of data</strong>. It will be based statistical findings and evidence base rather than false assumptions. We would also prefer an <strong>ethnographic and qualitative research</strong> based data which may predict right pictures during the election.</li>
+      <li>This platform is a combination of <strong>academic knowledge, research, analytical ability, communication skills, and professional judgment</strong> which help to predict voter behavior, patterns and new emerging challenges in the electoral democratic societies of global south region.</li>
+      <li>Our team consultants will use new <strong>technological tools such digital research tools, data-analysis software, communication platforms, social-media analytics, geographic information systems</strong>, and other technologies which can help to process information and evaluate communication activities in right direction.</li>
+      <li>This platform may use <strong>Artificial Intelligence (AI) analytical tools</strong> to explore political communication and research. However, require careful attention to accuracy, privacy, transparency, bias, and applicable AI regulations are subject to term and conditions.</li>
+      <li>Lastly, the political consultancy is subject to laws and regulations that vary by individual, country and jurisdiction. Hence, <strong>political advertising, campaign finance, privacy and data protection, media regulation, intellectual property, lobbying, and disclosure requirements</strong> are subject to term and conditions.</li>
+    </ul>
+    <div style="margin-top:24px;">
+      <a href="{% url 'contact' %}" class="btn-primary"><i class="bi bi-envelope"></i> Enquire Now</a>
+    </div>
+  </section>
+
+</div>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}Privacy Policy{% endblock %}
+{% block content %}
+<div class="page-hero"><div class="container">
+  <h1 class="page-hero-title"><span>Privacy</span> Policy</h1>
+  <p class="page-hero-subtitle">Last Updated: August 2025</p>
+</div></div>
+<section class="section"><div class="container" style="max-width:900px;">
+  <p>Please see our full <a href="{% url 'about' %}#privacy">Privacy Policy</a> on the About Us page, or read the summary below.</p>
+  <div class="content-section" id="privacy-full">
+    <h2>Privacy Policy</h2>
+    <p><strong>Global South Observer (GSO)</strong> is committed to protecting your personal information. When you subscribe, we collect your email address and, optionally, your mobile number. We use this data only to deliver our newsletter, research updates, and programme information.</p>
+    <ul>
+      <li>We do not sell or share your data with third parties for marketing purposes.</li>
+      <li>You may request deletion of your personal data at any time by contacting us.</li>
+      <li>Our service does not address anyone under the age of 14 years.</li>
+      <li>We use standard security measures to protect your information.</li>
+      <li>Cookies are used only for essential site functionality.</li>
+    </ul>
+    <p>For full details, see the <a href="{% url 'about' %}#privacy">Privacy Policy section</a> on our About Us page. Questions? Email: <a href="mailto:contactglobalsouthobserver@gmail.com">contactglobalsouthobserver@gmail.com</a></p>
+  </div>
+</div></section>
+{% endblock %}

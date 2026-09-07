@@ -1,0 +1,154 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}{{ post.title }}{% endblock %}
+{% block meta_description %}{{ post.content|truncatechars:160 }}{% endblock %}
+
+{% block content %}
+<div class="page-hero" style="padding:40px 0 30px;">
+  <div class="container">
+    <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:12px;">
+      <a href="{% url 'news' %}?category={{ post.category }}"
+         style="background:var(--blue);color:#fff;font-family:var(--font-ui);font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;padding:4px 12px;">
+        {{ post.get_category_display }}
+      </a>
+      <span style="font-family:var(--font-ui);font-size:.75rem;color:rgba(255,255,255,.5);">
+        <i class="bi bi-calendar3"></i> {{ post.published_at|date:"d F Y" }}
+        &nbsp;&bull;&nbsp;
+        <i class="bi bi-eye"></i> {{ post.views }} views
+      </span>
+    </div>
+    <h1 style="font-family:var(--font-title);font-size:clamp(1.6rem,4vw,2.8rem);font-weight:900;color:#000;line-height:1.15;max-width:850px;">{{ post.title }}</h1>
+    <div style="margin-top:16px;display:flex;align-items:center;gap:12px;">
+      <a href="{{ post.author.get_absolute_url }}" style="display:flex;align-items:center;gap:10px;text-decoration:none;">
+        {% if post.author.photo %}
+        <img src="{{ post.author.photo.url }}" alt="{{ post.author }}"
+             style="width:44px;height:44px;border-radius:50%;border:2px solid var(--blue);"
+             onerror="this.src='/static/images/default-avatar.svg'"/>
+        {% else %}
+        <div style="width:44px;height:44px;border-radius:50%;background:var(--blue);display:flex;align-items:center;justify-content:center;font-size:1.2rem;color:#fff;">
+          <i class="bi bi-person-fill"></i>
+        </div>
+        {% endif %}
+        <div>
+          <div style="font-family:var(--font-ui);font-weight:700;color:#fff;font-size:.85rem;">{{ post.author }}</div>
+          <div style="font-family:var(--font-ui);font-size:.72rem;color:rgba(255,255,255,.5);">{{ post.author.published_count }} articles published</div>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<section class="section" style="padding-top:40px;">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:1fr 280px;gap:40px;align-items:start;">
+
+      <!-- Article content -->
+      <article>
+        <!-- Featured image -->
+        <div style="margin-bottom:28px;border:1px solid var(--border);">
+          <img src="{{ post.image.url }}" alt="{{ post.title }}"
+               style="width:100%;max-height:480px;object-fit:cover;display:block;"
+               onerror="this.src='/static/images/news-placeholder.svg'"/>
+        </div>
+
+        <!-- Article body -->
+        <div style="text-align: justify; font-family:var(--font-body);font-size:1rem;line-height:1.85;color:var(--dark-gray);">
+          {{ post.content|linebreaks }}
+        </div>
+
+        <!-- Keywords -->
+        {% if post.keywords %}
+        <div style="margin-top:32px;padding-top:20px;border-top:2px solid var(--border);">
+          <span style="font-family:var(--font-ui);font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--mid-gray);">Keywords: </span>
+          {% for kw in post.keywords.split %}
+          <span style="display:inline-block;background:var(--light-gray);font-family:var(--font-ui);font-size:.75rem;padding:3px 10px;margin:2px;border:1px solid var(--border);">{{ kw|cut:"," }}</span>
+          {% endfor %}
+        </div>
+        {% endif %}
+
+        <!-- Share -->
+        <div style="margin-top:24px;padding:20px;background:var(--light-gray);border-left:4px solid var(--blue);">
+          <p style="font-family:var(--font-ui);font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px;color:var(--near-black);">Share this article</p>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;">
+            <a href="https://twitter.com/intent/tweet?text={{ post.title|urlencode }}&url={{ request.build_absolute_uri }}"
+               target="_blank" rel="noopener"
+               style="display:inline-flex;align-items:center;gap:6px;background:#000;color:#fff;font-family:var(--font-ui);font-size:.75rem;font-weight:700;padding:8px 16px;">
+               <i class="bi bi-twitter-x"></i> X/Twitter</a>
+            <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ request.build_absolute_uri }}&title={{ post.title|urlencode }}"
+               target="_blank" rel="noopener"
+               style="display:inline-flex;align-items:center;gap:6px;background:#0077b5;color:#fff;font-family:var(--font-ui);font-size:.75rem;font-weight:700;padding:8px 16px;">
+               <i class="bi bi-linkedin"></i> LinkedIn</a>
+            <a href="https://api.whatsapp.com/send?text={{ post.title|urlencode }}%20{{ request.build_absolute_uri|urlencode }}"
+               target="_blank" rel="noopener"
+               style="display:inline-flex;align-items:center;gap:6px;background:#25d366;color:#fff;font-family:var(--font-ui);font-size:.75rem;font-weight:700;padding:8px 16px;">
+               <i class="bi bi-whatsapp"></i> WhatsApp</a>
+          </div>
+        </div>
+
+        <!-- Author box -->
+        <div style="margin-top:32px;border:1px solid var(--border);border-top:4px solid var(--blue);padding:28px;display:flex;gap:20px;align-items:flex-start;">
+          <a href="{{ post.author.get_absolute_url }}" style="flex-shrink:0;">
+            {% if post.author.photo %}
+            <img src="{{ post.author.photo.url }}" alt="{{ post.author }}"
+                 style="width:80px;height:80px;border-radius:50%;border:3px solid var(--blue);"
+                 onerror="this.src='/static/images/default-avatar.svg'"/>
+            {% else %}
+            <div style="width:80px;height:80px;border-radius:50%;background:var(--blue);display:flex;align-items:center;justify-content:center;font-size:2rem;color:#fff;">
+              <i class="bi bi-person-fill"></i>
+            </div>
+            {% endif %}
+          </a>
+          <div>
+            <div style="font-family:var(--font-ui);font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--blue);margin-bottom:4px;">About the Author</div>
+            <h3 style="font-family:var(--font-body);font-size:1.1rem;font-weight:700;margin-bottom:6px;">
+              <a href="{{ post.author.get_absolute_url }}" style="color:var(--near-black);">{{ post.author }}</a>
+            </h3>
+            {% if post.author.bio %}
+            <p style="font-size:.85rem;color:var(--mid-gray);line-height:1.7;margin-bottom:10px;">{{ post.author.bio|truncatechars:200 }}</p>
+            {% endif %}
+            <div style="display:flex;gap:8px;flex-wrap:wrap;">
+              <a href="{{ post.author.get_absolute_url }}" class="btn-outline-blue" style="font-size:.72rem;padding:5px 12px;">
+                <i class="bi bi-person"></i> View Profile ({{ post.author.published_count }} articles)
+              </a>
+              {% if post.author.twitter_handle %}
+              <a href="https://twitter.com/{{ post.author.twitter_handle|cut:'@' }}" target="_blank" rel="noopener"
+                 style="display:inline-flex;align-items:center;gap:5px;background:#000;color:#fff;font-family:var(--font-ui);font-size:.72rem;font-weight:700;padding:5px 12px;">
+                 <i class="bi bi-twitter-x"></i></a>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Sidebar -->
+      <aside>
+        {% if related %}
+        <div style="background:var(--light-gray);padding:20px;margin-bottom:24px;">
+          <h4 style="font-family:var(--font-ui);font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--near-black);margin-bottom:14px;padding-bottom:8px;border-bottom:2px solid var(--blue);">Related Articles</h4>
+          <div style="display:flex;flex-direction:column;gap:14px;">
+            {% for r in related %}
+            <div style="display:flex;gap:10px;align-items:flex-start;">
+              <img src="{{ r.image.url }}" alt="{{ r.title }}"
+                   style="width:64px;height:52px;object-fit:cover;flex-shrink:0;"
+                   onerror="this.src='/static/images/news-placeholder.svg'"/>
+              <div>
+                <a href="{{ r.get_absolute_url }}" style="font-family:var(--font-body);font-size:.82rem;font-weight:700;color:var(--near-black);line-height:1.4;display:block;margin-bottom:4px;">{{ r.title|truncatechars:65 }}</a>
+                <span style="font-family:var(--font-ui);font-size:.7rem;color:var(--mid-gray);">{{ r.published_at|date:"d M Y" }}</span>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+        {% endif %}
+
+        <div style="background:var(--black);padding:20px;border-top:4px solid var(--blue);">
+          <h4 style="font-family:var(--font-title);font-size:1.1rem;font-weight:800;text-transform:uppercase;color:#fff;margin-bottom:8px;">Write for Us</h4>
+          <p style="font-size:.8rem;color:rgba(255,255,255,.6);line-height:1.6;margin-bottom:14px;">Share your research and analysis with our global audience.</p>
+          <a href="{% url 'author_register' %}" class="btn-primary" style="font-size:.75rem;padding:9px 16px;width:100%;justify-content:center;display:flex;"><i class="bi bi-pencil-square"></i> Become an Author</a>
+        </div>
+      </aside>
+
+    </div>
+  </div>
+</section>
+{% endblock %}

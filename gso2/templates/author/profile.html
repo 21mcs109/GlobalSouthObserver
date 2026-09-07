@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}{{ author }} — Author Profile{% endblock %}
+{% block meta_description %}{{ author }} is an author at Global South Observer with {{ post_count }} published articles.{% endblock %}
+
+{% block content %}
+
+<!-- Author hero -->
+<div style="background:var(--black);padding:52px 0 40px;border-bottom:4px solid var(--blue);">
+  <div class="container">
+    <div style="display:flex;gap:28px;align-items:center;flex-wrap:wrap;">
+      <!-- Photo -->
+      <div style="flex-shrink:0;">
+        {% if author.photo %}
+        <img src="{{ author.photo.url }}" alt="{{ author }}"
+             style="width:120px;height:120px;border-radius:50%;border:4px solid var(--blue);display:block;"
+             onerror="this.src='/static/images/default-avatar.svg'"/>
+        {% else %}
+        <div style="width:120px;height:120px;border-radius:50%;background:var(--blue);display:flex;align-items:center;justify-content:center;font-size:3.5rem;color:rgba(255,255,255,.7);">
+          <i class="bi bi-person-fill"></i>
+        </div>
+        {% endif %}
+      </div>
+      <!-- Info -->
+      <div style="flex:1;min-width:200px;">
+        <div style="font-family:var(--font-ui);font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--blue-light);margin-bottom:6px;">
+          <i class="bi bi-pencil-fill"></i> GSO Author
+        </div>
+        <h1 style="font-family:var(--font-title);font-size:clamp(1.8rem,4vw,3rem);font-weight:900;color:#fff;text-transform:uppercase;line-height:1.1;margin-bottom:10px;">
+          {{ author }}
+        </h1>
+        {% if author.bio %}
+        <p style="font-size:.9rem;color:rgba(255,255,255,.65);max-width:600px;line-height:1.7;margin-bottom:14px;">{{ author.bio }}</p>
+        {% endif %}
+        <!-- Social links -->
+        <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;">
+          {% if author.twitter_handle %}
+          <a href="https://twitter.com/{{ author.twitter_handle|cut:'@' }}" target="_blank" rel="noopener"
+             style="display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.8);font-family:var(--font-ui);font-size:.75rem;padding:6px 12px;">
+             <i class="bi bi-twitter-x"></i> {{ author.twitter_handle }}</a>
+          {% endif %}
+          {% if author.linkedin_url %}
+          <a href="{{ author.linkedin_url }}" target="_blank" rel="noopener"
+             style="display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.8);font-family:var(--font-ui);font-size:.75rem;padding:6px 12px;">
+             <i class="bi bi-linkedin"></i> LinkedIn</a>
+          {% endif %}
+          {% if author.website %}
+          <a href="{{ author.website }}" target="_blank" rel="noopener"
+             style="display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.8);font-family:var(--font-ui);font-size:.75rem;padding:6px 12px;">
+             <i class="bi bi-globe2"></i> Website</a>
+          {% endif %}
+        </div>
+      </div>
+      <!-- Stats -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;flex-shrink:0;">
+        <div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);padding:16px 20px;text-align:center;">
+          <div style="font-family:var(--font-title);font-size:2rem;font-weight:900;color:var(--blue-light);">{{ post_count }}</div>
+          <div style="font-family:var(--font-ui);font-size:.7rem;text-transform:uppercase;letter-spacing:1px;color:rgba(255,255,255,.5);">Articles</div>
+        </div>
+        <div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);padding:16px 20px;text-align:center;">
+          <div style="font-family:var(--font-title);font-size:2rem;font-weight:900;color:var(--blue-light);">{{ total_views }}</div>
+          <div style="font-family:var(--font-ui);font-size:.7rem;text-transform:uppercase;letter-spacing:1px;color:rgba(255,255,255,.5);">Total Views</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Author's articles -->
+<section class="section" style="padding-top:40px;">
+  <div class="container">
+    <div style="margin-bottom:28px;">
+      <div class="section-label"><i class="bi bi-journal-richtext"></i> Articles by {{ author }}</div>
+      <h2 class="section-title">Published Articles</h2>
+      <div class="section-divider"></div>
+    </div>
+
+    {% if posts %}
+    <div class="news-grid">
+      {% for post in posts %}
+      <article class="news-card" data-animate>
+        <div class="card-img-wrap">
+          <a href="{{ post.get_absolute_url }}">
+            <img src="{{ post.image.url }}" alt="{{ post.title }}" loading="lazy"
+                 onerror="this.src='/static/images/news-placeholder.svg'"/>
+          </a>
+          <span class="card-source">{{ post.get_category_display }}</span>
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">
+            <a href="{{ post.get_absolute_url }}">{{ post.title|truncatechars:85 }}</a>
+          </h3>
+          <p class="card-desc">{{ post.content|truncatechars:110 }}</p>
+          <div class="card-meta">
+            <span><i class="bi bi-calendar3"></i> {{ post.published_at|date:"d M Y" }}</span>
+            <span><i class="bi bi-eye"></i> {{ post.views }} views</span>
+          </div>
+          <a href="{{ post.get_absolute_url }}" class="card-read-more">Read More <i class="bi bi-arrow-right"></i></a>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+    {% else %}
+    <div class="empty-state">
+      <i class="bi bi-journal"></i>
+      <p>No published articles yet from this author.</p>
+    </div>
+    {% endif %}
+
+  </div>
+</section>
+{% endblock %}

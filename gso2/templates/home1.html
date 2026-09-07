@@ -1,0 +1,195 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+<!-- Hero -->
+<section class="hero" aria-label="Hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow"><i class="bi bi-globe-americas"></i> Independent Research &amp; Analysis Platform</div>
+    <h2 class="hero-title"><span>Voice of</span><br/>Global South</h2>
+    <p class="hero-sub">Academic research, leadership training, political consultancy and news analysis keeping an eye on the emerging Global South region.</p>
+    <div class="hero-actions">
+      <a href="{% url 'news' %}" class="btn-primary"><i class="bi bi-newspaper"></i> Read Articles</a>
+      <a href="{% url 'author_register' %}" class="btn-secondary"><i class="bi bi-pencil-square"></i> Become an Author</a>
+      <a href="{% url 'subscribe' %}" class="btn-secondary"><i class="bi bi-envelope"></i> Subscribe</a>
+    </div>
+  </div>
+</section>
+
+<!-- Stats bar -->
+{% comment %} <div class="stats-row">
+  <div class="stat-item"><div class="stat-num">130+</div><div class="stat-label">Countries Covered</div></div>
+  <div class="stat-item"><div class="stat-num">500+</div><div class="stat-label">Articles Published</div></div>
+  <div class="stat-item"><div class="stat-num">45+</div><div class="stat-label">Expert Advisors</div></div>
+  <div class="stat-item"><div class="stat-num">100K+</div><div class="stat-label">Subscribers</div></div>
+  <div class="stat-item"><div class="stat-num">8+</div><div class="stat-label">Years of Research</div></div>
+</div> {% endcomment %}
+
+<!-- Latest Posts + Trending -->
+<section class="section">
+  <div class="container">
+    <div class="featured-layout">
+
+      <!-- Latest Posts -->
+      <div>
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:10px;">
+          <div>
+            <div class="section-label"><i class="bi bi-clock-history"></i> Latest Posts</div>
+            <h2 class="section-title">Latest Articles</h2>
+            <div class="section-divider"></div>
+          </div>
+          <a href="{% url 'news' %}" class="section-view-all">View All <i class="bi bi-arrow-right"></i></a>
+        </div>
+
+        {% if latest_posts %}
+        <div class="news-grid" style="grid-template-columns:1fr 1fr;">
+          {% for post in latest_posts %}
+          <article class="news-card" data-animate>
+            <div class="card-img-wrap">
+              <a href="{{ post.get_absolute_url }}">
+                <img src="{{ post.image.url }}" alt="{{ post.title }}" loading="lazy"
+                     onerror="this.src='/static/images/news-placeholder.svg'"/>
+              </a>
+              <span class="card-source">{{ post.get_category_display }}</span>
+            </div>
+            <div class="card-body">
+              <h3 class="card-title">
+                <a href="{{ post.get_absolute_url }}">{{ post.title|truncatechars:85 }}</a>
+              </h3>
+              <p class="card-desc">{{ post.content|truncatechars:110 }}</p>
+              <div class="card-meta">
+                <span><i class="bi bi-person"></i>
+                  <a href="{{ post.author.get_absolute_url }}" style="color:var(--blue);">{{ post.author }}</a>
+                </span>
+                <span><i class="bi bi-calendar3"></i> {{ post.published_at|date:"d M Y" }}</span>
+                <span><i class="bi bi-eye"></i> {{ post.views }}</span>
+              </div>
+              <a href="{{ post.get_absolute_url }}" class="card-read-more">Read More <i class="bi bi-arrow-right"></i></a>
+            </div>
+          </article>
+          {% endfor %}
+        </div>
+        {% else %}
+        <div class="empty-state" style="border:2px dashed var(--border);padding:60px 20px;">
+          <i class="bi bi-newspaper" style="font-size:3rem;color:var(--blue);opacity:.3;display:block;margin-bottom:16px;"></i>
+          <h3 style="font-family:var(--font-title);font-size:1.4rem;text-transform:uppercase;margin-bottom:8px;">No Articles Yet</h3>
+          <p style="color:var(--mid-gray);margin-bottom:20px;">Be the first to publish. Register as an author and submit your article.</p>
+          <a href="{% url 'author_register' %}" class="btn-primary"><i class="bi bi-pencil-square"></i> Become an Author</a>
+        </div>
+        {% endif %}
+      </div>
+
+      <!-- Trending Posts (right sidebar) -->
+      <div>
+        <div style="margin-bottom:20px;">
+          <div class="section-label"><i class="bi bi-graph-up-arrow"></i> Trending</div>
+          <h2 class="section-title">Trending Posts</h2>
+          <div class="section-divider"></div>
+        </div>
+
+        {% if trending_posts %}
+        <div class="trending-list">
+          {% for post in trending_posts %}
+          <div class="trending-item" data-animate>
+            <span class="trending-num">{{ forloop.counter }}</span>
+            <div class="trending-body">
+              <h4><a href="{{ post.get_absolute_url }}">{{ post.title|truncatechars:80 }}</a></h4>
+              <div class="trending-meta">
+                <a href="{{ post.author.get_absolute_url }}" style="color:var(--blue);">{{ post.author }}</a>
+                &bull; <i class="bi bi-eye"></i> {{ post.views }} views
+                &bull; {{ post.published_at|date:"d M Y" }}
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+        {% else %}
+        <div style="padding:32px;border:1px solid var(--border);text-align:center;color:var(--mid-gray);">
+          <i class="bi bi-graph-up" style="font-size:2rem;display:block;margin-bottom:10px;"></i>
+          <p>Trending posts will appear here once articles are published.</p>
+        </div>
+        {% endif %}
+
+        <!-- Author CTA box -->
+        <div style="margin-top:24px;background:var(--black);padding:24px;border-top:4px solid var(--blue);">
+          <div class="section-label" style="color:rgba(255,255,255,.7);border-color:var(--blue-light);margin-bottom:12px;">
+            <i class="bi bi-pencil-fill"></i> Write for GSO
+          </div>
+          <h3 style="font-family:var(--font-title);color:var(--white);font-size:1.2rem;font-weight:800;text-transform:uppercase;margin-bottom:10px;">Become a Contributor</h3>
+          <p style="font-size:.82rem;color:rgba(255,255,255,.6);line-height:1.6;margin-bottom:16px;">Share your research, analysis, and perspectives with our global audience. Register as an author and start publishing today.</p>
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            <a href="{% url 'author_register' %}" class="btn-primary" style="font-size:.78rem;padding:9px 16px;justify-content:center;"><i class="bi bi-person-plus"></i> Register as Author</a>
+            <a href="{% url 'author_login' %}" class="btn-secondary" style="font-size:.78rem;padding:8px 16px;justify-content:center;border-color:rgba(255,255,255,.3);"><i class="bi bi-box-arrow-in-right"></i> Author Login</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Research Areas -->
+<section class="section bg-light" aria-label="Research areas">
+  <div class="container">
+    <div class="section-header centered">
+      <div class="section-label"><i class="bi bi-search"></i> Research Focus</div>
+      <h2 class="section-title">Our Research Areas</h2>
+      <div class="section-divider centered"></div>
+    </div>
+    <div class="three-col" style="margin-top:32px;">
+      <div class="service-card" data-animate><div class="icon"><i class="bi bi-globe2"></i></div><h3>International Relations &amp; Modern Diplomacy</h3><p>Analysis of bilateral and multilateral diplomacy and emerging global governance frameworks.</p></div>
+      <div class="service-card" data-animate><div class="icon"><i class="bi bi-shield-shaded"></i></div><h3>Geopolitics &amp; Security</h3><p>Strategic analysis of power dynamics, alliances, territorial disputes, and defence doctrines.</p></div>
+      <div class="service-card" data-animate><div class="icon"><i class="bi bi-rocket-takeoff"></i></div><h3>Defense &amp; Modern Warfare</h3><p>Modern warfare doctrines, arms proliferation, cybersecurity threats, and military modernisation.</p></div>
+      <div class="service-card" data-animate><div class="icon"><i class="bi bi-bank2"></i></div><h3>Public Policy &amp; Governance</h3><p>Institutional reform, democratic consolidation, and effective governance in developing economies.</p></div>
+      <div class="service-card" data-animate><div class="icon"><i class="bi bi-cpu"></i></div><h3>Artificial Intelligence &amp; Economy</h3><p>How AI and digital transformation reshape economic competitiveness in the Global South.</p></div>
+      <div class="service-card" data-animate><div class="icon"><i class="bi bi-tree"></i></div><h3>Environment &amp; Sustainable Development</h3><p>Climate justice, SDGs, green finance, and environmental change impact on developing nations.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- Newsletter -->
+<div class="newsletter-strip">
+  <div class="container">
+    <div class="newsletter-inner">
+      <div class="newsletter-text">
+        <div class="section-label" style="color:rgba(255,255,255,.7);border-color:var(--blue-light);"><i class="bi bi-envelope-open-fill"></i> Newsletter</div>
+        <h2>Subscribe to Global South Observer</h2>
+        <p>Get weekly research briefs, news analysis, and exclusive insights from our expert team delivered to your inbox.</p>
+      </div>
+      <div>
+        <form id="home-nl-form" novalidate>
+          {% csrf_token %}
+          <div class="nl-form">
+            <input type="email" name="email" placeholder="Enter your email address" class="nl-input" required/>
+            <button type="submit" class="nl-btn"><i class="bi bi-send"></i> Subscribe</button>
+          </div>
+          <div id="home-nl-msg" class="nl-msg"></div>
+          <p style="font-size:.72rem;color:rgba(255,255,255,.35);margin-top:10px;"><i class="bi bi-shield-check"></i> No spam. Unsubscribe anytime.</p>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.getElementById('home-nl-form')?.addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const email = this.querySelector('input[name="email"]').value.trim();
+  const msg   = document.getElementById('home-nl-msg');
+  const csrf  = document.cookie.match(/csrftoken=([^;]+)/)?.[1] || '';
+  try {
+    const res  = await fetch('/api/subscribe/', {method:'POST', headers:{'Content-Type':'application/x-www-form-urlencoded','X-CSRFToken':csrf}, body:`email=${encodeURIComponent(email)}&csrfmiddlewaretoken=${encodeURIComponent(csrf)}`});
+    const data = await res.json();
+    msg.textContent = data.success ? '✓ Subscribed! Thank you.' : (data.errors?.email?.[0] || 'Error. Try again.');
+    msg.className   = 'nl-msg ' + (data.success ? 'success' : 'error');
+    if (data.success) this.reset();
+  } catch { msg.textContent='Network error.'; msg.className='nl-msg error'; }
+});
+</script>
+{% endblock %}

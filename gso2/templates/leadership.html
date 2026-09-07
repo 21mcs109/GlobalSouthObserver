@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+{% block title %}Leadership{% endblock %}
+
+{% block content %}
+<div class="page-hero">
+  <div class="container">
+    <h1 class="page-hero-title"><span>Leadership</span></h1>
+    <p class="page-hero-subtitle">Founder Column &bull; Editorial Board &bull; Advisory Board &bull; Research Fellows</p>
+  </div>
+</div>
+
+<nav class="sub-navbar" aria-label="Leadership sections">
+  <div class="sub-navbar-inner">
+    {% for sec in leadership_sections %}
+    <button class="sub-nav-btn {% if forloop.first %}active{% endif %}" data-target="{{ sec.id }}">{{ sec.label }}</button>
+    {% endfor %}
+  </div>
+</nav>
+
+<div class="container">
+
+  <section class="content-section" id="founder">
+    <h2>Founder Column</h2>
+    <div class="two-col">
+      <div>
+        <p>Global South Observer was established with a vision to create an independent, non-partisan platform for research, analysis, and dialogue on issues affecting the Global South. The founding team comprises distinguished academicians, retired civil servants, industrialists, and senior community members committed to advancing new narratives for the developing world.</p>
+        <p>Our founders believe that the Global South — encompassing more than 130 nations across Africa, Asia, Latin America, and Oceania — must have a robust, research-backed voice in global discourse. Through rigorous scholarship, evidence-based analysis, and inclusive dialogue, we seek to bridge the gap between academia and policy-making.</p>
+        <div class="info-box" style="margin-top:20px;">
+          <h4>Founding Vision</h4>
+          <p>To build a repository of shared knowledge and wisdom on the Global South region, promoting the research work of young researchers, early academicians, civil servants, entrepreneurs, and senior community members.</p>
+        </div>
+      </div>
+      <div style="background:var(--black);padding:32px;border-top:4px solid var(--blue);">
+        <div class="section-label" style="color:rgba(255,255,255,.7);border-color:var(--blue-light);margin-bottom:16px;"><i class="bi bi-quote"></i> Founding Principle</div>
+        <blockquote style="font-family:var(--font-body);font-size:1.1rem;color:var(--white);line-height:1.7;font-style:italic;">"The Global South deserves a world-class platform that amplifies its voices, showcases its scholarship, and shapes global narratives from within."</blockquote>
+        <p style="font-family:var(--font-ui);font-size:.78rem;color:rgba(255,255,255,.5);margin-top:16px;">— GSO Founding Team</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="content-section" id="editorial">
+    <h2>Editorial Board</h2>
+    <p>The Global South Observer Editorial Board comprises experienced academics, journalists, policy analysts, and subject-matter experts who oversee the quality, accuracy, and integrity of all published content. The editorial team ensures that all submissions meet our rigorous standards of scholarship, originality, and analytical depth.</p>
+    <div class="info-box">
+      <h4>Editorial Guidelines</h4>
+      <p>The GSO seeks well-written scholarly work, commentaries, and opinions with critical and analytical perspectives on recent events in international relations, geopolitics, security, military strategic affairs, public policy, SDGs, philosophy, science, entertainment, healthcare, biodiversity, and more.</p>
+    </div>
+    <h3>Submission Guidelines</h3>
+    <ul>
+      <li>Articles should be <strong>around 1200 to 2000 words</strong>, line space 1.5, writing style in Times New Roman, original, topical, and informed by primary qualitative and quantitative data.</li>
+      <li>Authors may forward their <strong>80 words research affiliation</strong> and passport photo along with their separate article written in word file.</li>
+      <li>Pieces must be written in an <strong>analytical and critical style</strong> and include references, bibliographies and hyperlinked citations for all important claims.</li>
+      <li>GSO <strong>does not permit</strong> the use of generative Artificial Intelligence (AI) to assist with the content or writing. Ideas, writing, and citations must be your own.</li>
+      <li>Articles should comply with the copyright regulations of India and be <strong>free from plagiarism</strong>.</li>
+      <li>Submit to: <a href="mailto:contactglobalsouthobserver@gmail.com">contactglobalsouthobserver@gmail.com</a></li>
+    </ul>
+    <a href="{% url 'contact' %}#write-for-us" class="btn-primary" style="margin-top:16px;display:inline-flex;"><i class="bi bi-pencil-square"></i> Write for Us</a>
+  </section>
+
+  <section class="content-section" id="advisory">
+    <h2>Advisory Board</h2>
+    <p>Our Senior Advisory Board comprises distinguished scholars, diplomats, retired civil servants, and policy practitioners drawn from across the Global South and beyond. They provide strategic guidance on research directions, editorial standards, and programme development.</p>
+    {% if advisory_members %}
+    <div class="three-col" style="margin-top:28px;">
+      {% for member in advisory_members %}
+      <div class="service-card" data-animate style="text-align:center;">
+        <img src="{{ member.get_photo }}" alt="{{ member.name }}" style="width:80px;height:80px;object-fit:cover;border-radius:50%;margin:0 auto 12px;border:3px solid var(--blue);" onerror="this.src='/static/images/default-avatar.svg'"/>
+        <h3 style="font-size:.95rem;">{{ member.name }}</h3>
+        <p style="color:var(--blue);font-size:.78rem;font-weight:700;font-family:var(--font-ui);margin-bottom:4px;">{{ member.designation }}</p>
+        <p style="font-size:.75rem;color:var(--mid-gray);margin-bottom:8px;">{{ member.institution }}</p>
+        <span style="display:inline-block;background:var(--blue-pale);color:var(--blue);font-size:.7rem;padding:3px 10px;font-family:var(--font-ui);">{{ member.research_area }}</span>
+      </div>
+      {% endfor %}
+    </div>
+    {% else %}
+    <div class="info-box" style="margin-top:20px;">
+      <h4>Advisory Board Being Constituted</h4>
+      <p>Our Senior Advisory Board comprises distinguished scholars, retired ambassadors, and policy practitioners from across the Global South. Board member profiles will be published shortly. To express interest in joining our advisory network, please <a href="{% url 'contact' %}">contact us</a>.</p>
+    </div>
+    {% endif %}
+  </section>
+
+  <section class="content-section" id="fellows">
+    <h2>Research Fellows</h2>
+    <p>Global South Observer Research Fellows are accomplished scholars and practitioners who contribute to our research agenda through original publications, policy briefs, and collaborative projects. Fellows bring deep expertise from their respective regions and disciplines.</p>
+    <div class="three-col" style="margin-top:24px;">
+      <div class="service-card" data-animate>
+        <div class="icon"><i class="bi bi-journal-richtext"></i></div>
+        <h3>Senior Research Fellows</h3>
+        <p>Experienced scholars contributing long-form research, policy analysis, and book reviews on Global South affairs.</p>
+      </div>
+      <div class="service-card" data-animate>
+        <div class="icon"><i class="bi bi-person-workspace"></i></div>
+        <h3>Associate Research Fellows</h3>
+        <p>Early-career academics and policy professionals contributing commentaries, news analysis, and opinion pieces.</p>
+      </div>
+      <div class="service-card" data-animate>
+        <div class="icon"><i class="bi bi-mortarboard-fill"></i></div>
+        <h3>Research Interns</h3>
+        <p>Young scholars participating in our structured internship programme to develop research and analytical skills.</p>
+        <a href="{% url 'internships' %}" class="btn-outline-blue" style="margin-top:12px;display:inline-flex;font-size:.75rem;padding:7px 14px;">Apply <i class="bi bi-arrow-right"></i></a>
+      </div>
+    </div>
+  </section>
+
+</div>
+{% endblock %}

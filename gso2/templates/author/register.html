@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+{% block title %}Register as Author{% endblock %}
+{% block content %}
+<div class="page-hero" style="padding:44px 0 34px;">
+  <div class="container">
+    <h1 class="page-hero-title"><span>Author</span> Registration</h1>
+    <p class="page-hero-subtitle">Register to submit your research, analysis, and articles to Global South Observer</p>
+  </div>
+</div>
+<section class="section" style="padding-top:40px;">
+  <div class="container" style="max-width:860px;">
+    <div style="display:grid;grid-template-columns:1fr 1.6fr;gap:40px;align-items:start;">
+      <!-- Info -->
+      <div>
+        <div class="section-label"><i class="bi bi-info-circle"></i> Why Register?</div>
+        <h2 style="font-family:var(--font-title);font-size:1.6rem;font-weight:800;text-transform:uppercase;margin:10px 0 14px;">Join Our Author Community</h2>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:12px;">
+          <li style="display:flex;gap:10px;font-size:.88rem;color:var(--dark-gray);">
+            <i class="bi bi-check-circle-fill" style="color:var(--blue);flex-shrink:0;margin-top:2px;"></i>
+            Publish research articles, commentaries, and analyses
+          </li>
+          <li style="display:flex;gap:10px;font-size:.88rem;color:var(--dark-gray);">
+            <i class="bi bi-check-circle-fill" style="color:var(--blue);flex-shrink:0;margin-top:2px;"></i>
+            Track views and engagement on your posts
+          </li>
+          <li style="display:flex;gap:10px;font-size:.88rem;color:var(--dark-gray);">
+            <i class="bi bi-check-circle-fill" style="color:var(--blue);flex-shrink:0;margin-top:2px;"></i>
+            Build your public author profile
+          </li>
+          <li style="display:flex;gap:10px;font-size:.88rem;color:var(--dark-gray);">
+            <i class="bi bi-check-circle-fill" style="color:var(--blue);flex-shrink:0;margin-top:2px;"></i>
+            Reach a global audience interested in Global South affairs
+          </li>
+          <li style="display:flex;gap:10px;font-size:.88rem;color:var(--dark-gray);">
+            <i class="bi bi-check-circle-fill" style="color:var(--blue);flex-shrink:0;margin-top:2px;"></i>
+            All submissions reviewed within 2–3 business days
+          </li>
+        </ul>
+        <div class="info-box" style="margin-top:20px;">
+          <h4>Already registered?</h4>
+          <p><a href="{% url 'author_login' %}" style="color:var(--blue);font-weight:700;">Login to your author account →</a></p>
+        </div>
+      </div>
+      <!-- Form -->
+      <div class="form-card">
+        <h3><i class="bi bi-person-plus-fill"></i> Create Author Account</h3>
+        {% if messages %}{% for m in messages %}<div class="alert alert-{{ m.tags }}" style="margin-bottom:14px;"><i class="bi bi-info-circle-fill"></i> {{ m }}</div>{% endfor %}{% endif %}
+        <form method="POST" enctype="multipart/form-data" class="styled-form" novalidate>
+          {% csrf_token %}
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+            <div class="form-group">
+              <label class="form-label">First Name *</label>
+              {{ form.first_name }}
+              {% if form.first_name.errors %}<div class="field-error">{% for e in form.first_name.errors %}<span>{{ e }}</span>{% endfor %}</div>{% endif %}
+            </div>
+            <div class="form-group">
+              <label class="form-label">Last Name *</label>
+              {{ form.last_name }}
+              {% if form.last_name.errors %}<div class="field-error">{% for e in form.last_name.errors %}<span>{{ e }}</span>{% endfor %}</div>{% endif %}
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Username * <small style="font-weight:400;color:var(--mid-gray);">(used for login &amp; profile URL)</small></label>
+            {{ form.username }}
+            {% if form.username.errors %}<div class="field-error">{% for e in form.username.errors %}<span>{{ e }}</span>{% endfor %}</div>{% endif %}
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email Address *</label>
+            {{ form.email }}
+            {% if form.email.errors %}<div class="field-error">{% for e in form.email.errors %}<span>{{ e }}</span>{% endfor %}</div>{% endif %}
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+            <div class="form-group">
+              <label class="form-label">Password *</label>
+              {{ form.password1 }}
+              {% if form.password1.errors %}<div class="field-error">{% for e in form.password1.errors %}<span>{{ e }}</span>{% endfor %}</div>{% endif %}
+            </div>
+            <div class="form-group">
+              <label class="form-label">Confirm Password *</label>
+              {{ form.password2 }}
+              {% if form.password2.errors %}<div class="field-error">{% for e in form.password2.errors %}<span>{{ e }}</span>{% endfor %}</div>{% endif %}
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Short Bio <small style="font-weight:400;color:var(--mid-gray);">(shown on your public profile)</small></label>
+            {{ form.bio }}
+          </div>
+          <div class="form-group">
+            <label class="form-label">Profile Photo <small style="font-weight:400;color:var(--mid-gray);">(optional)</small></label>
+            {{ form.photo }}
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+            <div class="form-group">
+              <label class="form-label">Website</label>{{ form.website }}
+            </div>
+            <div class="form-group">
+              <label class="form-label">Twitter Handle</label>{{ form.twitter_handle }}
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">LinkedIn URL</label>{{ form.linkedin_url }}
+          </div>
+          {% if form.non_field_errors %}
+          <div class="field-error">{% for e in form.non_field_errors %}<span>{{ e }}</span>{% endfor %}</div>
+          {% endif %}
+          <button type="submit" class="btn-primary btn-full"><i class="bi bi-person-check"></i> Create Author Account</button>
+          <p class="form-note" style="margin-top:10px;">By registering you agree to our <a href="{% url 'about' %}#terms">Terms &amp; Conditions</a> and <a href="{% url 'about' %}#third-party">Third Party Material Policy</a>.</p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

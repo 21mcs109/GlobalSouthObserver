@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}Terms & Conditions{% endblock %}
+{% block content %}
+<div class="page-hero"><div class="container">
+  <h1 class="page-hero-title"><span>Terms</span> &amp; Conditions</h1>
+  <p class="page-hero-subtitle">Last Updated: August 2025</p>
+</div></div>
+<section class="section"><div class="container" style="max-width:900px;">
+  <p>Please see our full <a href="{% url 'about' %}#terms">Terms &amp; Conditions</a> on the About Us page, or read the summary below.</p>
+  <div class="content-section" id="terms-full">
+    <h2>Terms &amp; Conditions</h2>
+    <p>By visiting our website or using our services, you agree to be bound by these Terms and Conditions. If you do not agree, please do not access or use our platform.</p>
+    <ul>
+      <li>Global South Observer reserves the right to update or change these terms at any time.</li>
+      <li>All content is provided for informational purposes and should not be relied upon as professional advice.</li>
+      <li>We reserve the right to refuse or cancel any subscription at our discretion.</li>
+      <li>User-submitted content must be original and free from plagiarism.</li>
+      <li>Third-party links are provided for convenience and do not constitute endorsement.</li>
+    </ul>
+    <p>For full details, see the <a href="{% url 'about' %}#terms">Terms &amp; Conditions section</a> on our About Us page.</p>
+  </div>
+</div></section>
+{% endblock %}

@@ -1,0 +1,511 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="{% block meta_description %}Global South Observer — Voice of Global South.{% endblock %}"
+    />
+    <title>
+      {% block title %}{{ SITE_NAME }}{% endblock %} | Voice of Global South
+    </title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Source+Serif+4:wght@400;600;700&family=Open+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <style>
+      .author-bar {
+        background: #1a1a1a;
+        border-bottom: 1px solid #333;
+        padding: 4px 0;
+        font-family: var(--font-ui);
+        font-size: 0.72rem;
+      }
+      .author-bar-inner {
+        width: min(1200px, 100% - 2rem);
+        margin-inline: auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+      }
+      .author-bar a {
+        color: rgba(255, 255, 255, 0.65);
+        transition: color 0.2s;
+      }
+      .author-bar a:hover {
+        color: var(--blue-light);
+      }
+      .author-bar .sep {
+        color: #444;
+        margin: 0 4px;
+      }
+      .author-bar .hi {
+        color: rgba(255, 255, 255, 0.45);
+      }
+      .author-bar .btn-author {
+        background: var(--blue);
+        color: #fff !important;
+        padding: 3px 10px;
+        border-radius: 2px;
+        font-weight: 700;
+      }
+      .author-bar .btn-author:hover {
+        background: var(--blue-dark);
+      }
+      .author-bar .btn-reg {
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        padding: 2px 9px;
+        border-radius: 2px;
+        color: rgba(255, 255, 255, 0.6) !important;
+      }
+      .author-bar .btn-reg:hover {
+        border-color: var(--blue-light);
+        color: var(--blue-light) !important;
+      }
+      .ist-clock {
+        color: rgba(255, 255, 255, 0.5);
+        font-size: 0.7rem;
+      }
+    </style>
+    {% block extra_css %}{% endblock %}
+  </head>
+  <body>
+    <!-- ══ AUTHOR BAR ════════════════════════════════════════════════════════════ -->
+    <div class="author-bar">
+      <div class="author-bar-inner">
+        <span class="ist-clock" id="ist-clock"
+          ><i class="bi bi-clock"></i> Loading IST…</span
+        >
+        <div style="display: flex; align-items: center; gap: 6px">
+          {% if request.user.is_authenticated and request.user.author_profile %}
+          <span class="hi"
+            >Welcome, {{
+            request.user.get_full_name|default:request.user.username }}</span
+          >
+          <span class="sep">|</span>
+          <a href="{% url 'author_dashboard' %}"
+            ><i class="bi bi-grid"></i> Dashboard</a
+          >
+          <span class="sep">|</span>
+          <a href="{% url 'author_submit' %}" class="btn-author"
+            ><i class="bi bi-plus-circle"></i> Submit Post</a
+          >
+          <span class="sep">|</span>
+          <a href="{% url 'author_logout' %}"
+            ><i class="bi bi-box-arrow-right"></i> Logout</a
+          >
+          {% else %}
+          <a href="{% url 'author_login' %}"
+            ><i class="bi bi-person-fill"></i> Author Login</a
+          >
+          <span class="sep">|</span>
+          <a href="{% url 'author_register' %}" class="btn-reg"
+            ><i class="bi bi-person-plus"></i> Register as Author</a
+          >
+          {% endif %}
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ TOP INFO BAR ══════════════════════════════════════════════════════════ -->
+    <div class="topbar">
+      <div class="topbar-inner">
+        <div class="topbar-left">
+          <span
+            ><i class="bi bi-envelope-fill"></i>
+            contactglobalsouthobserver@gmail.com</span
+          >
+        </div>
+        <div class="topbar-social">
+          <a
+            href="https://www.facebook.com/"
+            target="_blank"
+            rel="noopener"
+            aria-label="Facebook"
+            ><i class="bi bi-facebook"></i
+          ></a>
+          <a
+            href="https://www.youtube.com/@GlobalSouthObserver-z4y"
+            target="_blank"
+            rel="noopener"
+            aria-label="YouTube"
+            ><i class="bi bi-youtube"></i
+          ></a>
+          <a
+            href="https://www.linkedin.com/groups/40128007/"
+            target="_blank"
+            rel="noopener"
+            aria-label="LinkedIn"
+            ><i class="bi bi-linkedin"></i
+          ></a>
+          <a
+            href="https://www.instagram.com/globalsouthobserver/"
+            target="_blank"
+            rel="noopener"
+            aria-label="Instagram"
+            ><i class="bi bi-instagram"></i
+          ></a>
+          <a
+            href="https://x.com/globalsouthobsr"
+            target="_blank"
+            rel="noopener"
+            aria-label="X/Twitter"
+            ><i class="bi bi-twitter-x"></i
+          ></a>
+          <a
+            href="https://chat.whatsapp.com/C6cLmw72c8KI2cx3gUOkaT"
+            target="_blank"
+            rel="noopener"
+            aria-label="WhatsApp"
+            ><i class="bi bi-whatsapp"></i
+          ></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ MASTHEAD ══════════════════════════════════════════════════════════════ -->
+    <div class="masthead">
+      <div class="masthead-inner">
+        <a href="{% url 'home' %}" class="masthead-logo" aria-label="Home">
+          <img
+            src="{% static 'images/logo.png' %}"
+            alt="GSO Logo"
+            width="85"
+            height="100"
+          />
+        </a>
+        <div class="masthead-title-area">
+          <h1 class="site-title">
+            <a href="{% url 'home' %}" style="text-decoration: none">
+              <span class="t-blue">G</span><span class="t-black">LOBAL </span
+              ><span class="t-blue">S</span><span class="t-black">OUTH </span
+              ><span class="t-blue">O</span><span class="t-black">BSERVER</span>
+            </a>
+          </h1>
+          <p class="site-subtitle">(Voice of Global South)</p>
+        </div>
+        <div class="masthead-search">
+          <form
+            method="GET"
+            action="{% url 'news' %}"
+            class="search-box"
+            role="search"
+          >
+            <input
+              type="text"
+              name="q"
+              placeholder="Search posts…"
+              aria-label="Search"
+            />
+            <button type="submit" aria-label="Search">
+              <i class="bi bi-search"></i>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ MAIN NAVBAR ════════════════════════════════════════════════════════════ -->
+    <nav class="main-navbar" aria-label="Main navigation">
+      <div class="navbar-inner">
+        <ul class="nav-list" id="nav-list">
+          {% for item in NAV_ITEMS %}
+          <li class="nav-item{% if item.subs %} has-dropdown{% endif %}">
+            <a
+              href="{% url item.url %}"
+              class="nav-link-main {% if request.resolver_match.url_name == item.url %}active{% endif %}"
+              {%
+              if
+              item.subs
+              %}aria-haspopup="true"
+              aria-expanded="false"
+              {%
+              endif
+              %}
+            >
+              {{ item.name }}{% if item.subs %}
+              <i class="bi bi-chevron-down"></i>{% endif %}
+            </a>
+            {% if item.subs %}
+            <div class="dropdown-menu">
+              {% for sub in item.subs %}
+              <a href="{% url sub.url %}{{ sub.anchor }}">{{ sub.name }}</a>
+              {% endfor %}
+            </div>
+            {% endif %}
+          </li>
+          {% endfor %}
+        </ul>
+        <button
+          class="hamburger"
+          id="hamburger"
+          aria-label="Toggle navigation"
+          aria-expanded="false"
+        >
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- ══ FLASH MESSAGES ════════════════════════════════════════════════════════ -->
+    {% if messages %}
+    <div class="messages-container" role="alert" aria-live="polite">
+      {% for message in messages %}
+      <div class="alert alert-{{ message.tags }}">
+        <i
+          class="bi bi-{% if message.tags == 'success' %}check-circle-fill{% else %}exclamation-circle-fill{% endif %}"
+        ></i>
+        {{ message }}
+        <button class="alert-close" aria-label="Close">&times;</button>
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    <main id="main-content">{% block content %}{% endblock %}</main>
+
+    <!-- ══ FOOTER ════════════════════════════════════════════════════════════════ -->
+    <footer class="site-footer">
+      <div class="footer-top">
+        <div class="container">
+          <div class="footer-grid">
+            <div class="footer-brand-col">
+              <span class="footer-brand-name">
+                <span class="t-blue">G</span>lobal
+                <span class="t-blue">S</span>outh
+                <span class="t-blue">O</span>bserver
+              </span>
+              <p class="footer-tagline">Voice of Global South</p>
+              <p class="footer-about">
+                A leading academic research, leadership training, political
+                consultancy and news analysis platform focused on the emerging
+                Global South region.
+              </p>
+              <div class="footer-social">
+                <a
+                  href="mailto:contactglobalsouthobserver@gmail.com"
+                  aria-label="Email"
+                  ><i class="bi bi-envelope-fill"></i
+                ></a>
+                <a
+                  href="https://www.facebook.com/"
+                  target="_blank"
+                  rel="noopener"
+                  aria-label="Facebook"
+                  ><i class="bi bi-facebook"></i
+                ></a>
+                <a
+                  href="https://www.youtube.com/@GlobalSouthObserver-z4y"
+                  target="_blank"
+                  rel="noopener"
+                  aria-label="YouTube"
+                  ><i class="bi bi-youtube"></i
+                ></a>
+                <a
+                  href="https://www.linkedin.com/groups/40128007/"
+                  target="_blank"
+                  rel="noopener"
+                  aria-label="LinkedIn"
+                  ><i class="bi bi-linkedin"></i
+                ></a>
+                <a
+                  href="https://www.instagram.com/globalsouthobserver/"
+                  target="_blank"
+                  rel="noopener"
+                  aria-label="Instagram"
+                  ><i class="bi bi-instagram"></i
+                ></a>
+                <a
+                  href="https://x.com/globalsouthobsr"
+                  target="_blank"
+                  rel="noopener"
+                  aria-label="X/Twitter"
+                  ><i class="bi bi-twitter-x"></i
+                ></a>
+                <a
+                  href="https://chat.whatsapp.com/C6cLmw72c8KI2cx3gUOkaT"
+                  target="_blank"
+                  rel="noopener"
+                  aria-label="WhatsApp"
+                  ><i class="bi bi-whatsapp"></i
+                ></a>
+              </div>
+            </div>
+            <div class="footer-col">
+              <h4>Research Areas</h4>
+              <div class="footer-cats">
+                <a href="{% url 'news' %}?category=global-south"
+                  >International Relations &amp; Diplomacy</a
+                >
+                <a href="{% url 'news' %}?category=indo-pacific"
+                  >Geopolitics &amp; Security</a
+                >
+                <a href="{% url 'news' %}?category=south-asia"
+                  >Defense &amp; Modern Warfare</a
+                >
+                <a href="{% url 'news' %}?category=africa-latin-america"
+                  >Public Policy &amp; Governance</a
+                >
+                <a href="{% url 'news' %}?category=europe-middle-east"
+                  >AI &amp; Economy</a
+                >
+                <a href="{% url 'news' %}?category=south-east-asia"
+                  >Environment &amp; Sustainability</a
+                >
+                <a href="{% url 'news' %}?category=arctic-north-america"
+                  >Philosophy &amp; Science</a
+                >
+                <a href="{% url 'news' %}">Literature &amp; Entertainment</a>
+              </div>
+            </div>
+            <div class="footer-col">
+              <h4>Quick Links</h4>
+              <ul class="footer-links">
+                <li>
+                  <a href="{% url 'home' %}"
+                    ><i class="bi bi-chevron-right"></i> Home</a
+                  >
+                </li>
+                <li>
+                  <a href="{% url 'about' %}"
+                    ><i class="bi bi-chevron-right"></i> About Us</a
+                  >
+                </li>
+                <li>
+                  <a href="{% url 'news' %}"
+                    ><i class="bi bi-chevron-right"></i> News Updates</a
+                  >
+                </li>
+                <li>
+                  <a href="{% url 'leadership' %}"
+                    ><i class="bi bi-chevron-right"></i> Leadership</a
+                  >
+                </li>
+                <li>
+                  <a href="{% url 'internships' %}"
+                    ><i class="bi bi-chevron-right"></i> Research Internship</a
+                  >
+                </li>
+                <li>
+                  <a href="{% url 'political' %}"
+                    ><i class="bi bi-chevron-right"></i> Political
+                    Consultancy</a
+                  >
+                </li>
+                <li>
+                  <a href="{% url 'podcasts' %}"
+                    ><i class="bi bi-chevron-right"></i> Podcast</a
+                  >
+                </li>
+                <li>
+                  <a href="{% url 'subscribe' %}"
+                    ><i class="bi bi-chevron-right"></i> Subscribe Us</a
+                  >
+                </li>
+                <li>
+                  <a href="{% url 'author_register' %}"
+                    ><i class="bi bi-chevron-right"></i> Become an Author</a
+                  >
+                </li>
+              </ul>
+            </div>
+            <div class="footer-col">
+              <h4>Author Zone</h4>
+              <ul class="footer-links">
+                <li>
+                  <a href="{% url 'author_register' %}"
+                    ><i class="bi bi-person-plus"></i> Register as Author</a
+                  >
+                </li>
+                <li>
+                  <a href="{% url 'author_login' %}"
+                    ><i class="bi bi-person-fill"></i> Author Login</a
+                  >
+                </li>
+                <li>
+                  <a href="{% url 'author_submit' %}"
+                    ><i class="bi bi-pencil-square"></i> Submit an Article</a
+                  >
+                </li>
+                <li>
+                  <a href="{% url 'contact' %}#write-for-us"
+                    ><i class="bi bi-journal-text"></i> Write for Us</a
+                  >
+                </li>
+                <li>
+                  <a href="mailto:contactglobalsouthobserver@gmail.com"
+                    ><i class="bi bi-envelope"></i>
+                    contactglobalsouthobserver@gmail.com</a
+                  >
+                </li>
+              </ul>
+              <div style="margin-top: 14px">
+                <a
+                  href="{% url 'author_register' %}"
+                  class="btn-primary"
+                  style="font-size: 0.72rem; padding: 8px 14px"
+                  >Become an Author</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr class="footer-divider" />
+      <div class="container">
+        <div class="footer-bottom">
+          <p>
+            &copy; {% now "Y" %} Global South Observer. All rights reserved.
+            Voice of Global South.
+          </p>
+          <div class="footer-bottom-links">
+            <a href="{% url 'about' %}#terms">Terms &amp; Conditions</a>
+            <a href="{% url 'about' %}#privacy">Privacy Policy</a>
+            <a href="{% url 'about' %}#third-party">Third Party</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <button class="back-to-top" id="back-to-top" aria-label="Back to top">
+      <i class="bi bi-chevron-up"></i>
+    </button>
+
+    {% load static %}
+    <script src="{% static 'js/script.js' %}"></script>
+    <script>
+      // Live IST clock
+      function updateISTClock() {
+        const el = document.getElementById("ist-clock");
+        if (!el) return;
+        const now = new Date();
+        el.innerHTML =
+          '<i class="bi bi-clock"></i> ' +
+          now.toLocaleString("en-IN", {
+            timeZone: "Asia/Kolkata",
+            weekday: "short",
+            day: "2-digit",
+            month: "short",
+            year: "numeric",
+            hour: "2-digit",
+            minute: "2-digit",
+            second: "2-digit",
+            hour12: true,
+          }) +
+          " IST";
+      }
+      updateISTClock();
+      setInterval(updateISTClock, 1000);
+    </script>
+    {% block extra_js %}{% endblock %}
+  </body>
+</html>

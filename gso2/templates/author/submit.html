@@ -1,0 +1,161 @@
+{% extends 'base.html' %}
+{% block title %}{% if editing %}Edit Article{% else %}Submit Article{% endif %}{% endblock %}
+
+{% block content %}
+<div class="page-hero" style="padding:36px 0 28px;">
+  <div class="container">
+    <h1 class="page-hero-title">
+      {% if editing %}<span>Edit</span> Article{% else %}<span>Submit</span> New Article{% endif %}
+    </h1>
+    <p class="page-hero-subtitle">
+      {% if editing %}
+        Update your article — it will be re-submitted for admin review after editing.
+      {% else %}
+        Fill all fields carefully. Articles are reviewed within 2–3 business days.
+        {% if request.user.author_profile.can_publish_directly %}
+        <strong style="color:var(--blue-light);">(Your articles publish directly — no review needed)</strong>
+        {% endif %}
+      {% endif %}
+    </p>
+  </div>
+</div>
+
+<section class="section" style="padding-top:36px;">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:1fr 280px;gap:36px;align-items:start;">
+
+      <!-- Form -->
+      <div class="form-card" style="padding:32px;">
+        <h3>
+          <i class="bi bi-{% if editing %}pencil-square{% else %}journal-plus{% endif %}"></i>
+          {% if editing %}Edit: {{ post.title|truncatechars:50 }}{% else %}Article Submission Form{% endif %}
+        </h3>
+        {% if messages %}
+        {% for m in messages %}
+        <div class="alert alert-{{ m.tags }}" style="margin-bottom:14px;">
+          <i class="bi bi-check-circle-fill"></i> {{ m }}
+        </div>
+        {% endfor %}
+        {% endif %}
+        <form method="POST" enctype="multipart/form-data" class="styled-form" novalidate>
+          {% csrf_token %}
+
+          <div class="form-group">
+            <label class="form-label">Article Title * <small style="font-weight:400;color:var(--mid-gray);">(min 10 characters, be clear and specific)</small></label>
+            {{ form.title }}
+            {% if form.title.errors %}<div class="field-error">{% for e in form.title.errors %}<span>{{ e }}</span>{% endfor %}</div>{% endif %}
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Category *</label>
+            {{ form.category }}
+            {% if form.category.errors %}<div class="field-error">{% for e in form.category.errors %}<span>{{ e }}</span>{% endfor %}</div>{% endif %}
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Featured Image *
+              <small style="font-weight:400;color:var(--mid-gray);">(JPG/PNG, clear and relevant to your article)</small>
+            </label>
+            {{ form.image }}
+            {% if form.image.errors %}<div class="field-error">{% for e in form.image.errors %}<span>{{ e }}</span>{% endfor %}</div>{% endif %}
+            {% if editing and post.image %}
+            <div style="margin-top:8px;font-size:.75rem;color:var(--mid-gray);">
+              Current image: <a href="{{ post.image.url }}" target="_blank" style="color:var(--blue);">{{ post.image.name }}</a>
+              (leave blank to keep existing)
+            </div>
+            {% endif %}
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Keywords *
+              <small style="font-weight:400;color:var(--mid-gray);">(comma separated, e.g. BRICS, India, diplomacy, geopolitics)</small>
+            </label>
+            {{ form.keywords }}
+            {% if form.keywords.errors %}<div class="field-error">{% for e in form.keywords.errors %}<span>{{ e }}</span>{% endfor %}</div>{% endif %}
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Full Article *
+              <small style="font-weight:400;color:var(--mid-gray);">(minimum 200 words, 1200–2000 words recommended)</small>
+            </label>
+            {{ form.content }}
+            {% if form.content.errors %}<div class="field-error">{% for e in form.content.errors %}<span>{{ e }}</span>{% endfor %}</div>{% endif %}
+            <div style="text-align:right;font-family:var(--font-ui);font-size:.72rem;color:var(--mid-gray);margin-top:4px;" id="word-count">0 words</div>
+          </div>
+
+          {% if form.non_field_errors %}
+          <div class="field-error" style="margin-bottom:10px;">{% for e in form.non_field_errors %}<span>{{ e }}</span>{% endfor %}</div>
+          {% endif %}
+
+          <button type="submit" class="btn-primary btn-full">
+            <i class="bi bi-send-fill"></i>
+            {% if editing %}Update &amp; Resubmit{% else %}Submit Article{% endif %}
+          </button>
+          <a href="{% url 'author_dashboard' %}" class="btn-black btn-full" style="margin-top:8px;text-decoration:none;">
+            <i class="bi bi-arrow-left"></i> Back to Dashboard
+          </a>
+        </form>
+      </div>
+
+      <!-- Guidelines sidebar -->
+      <aside>
+        <div style="background:var(--black);padding:20px;border-top:4px solid var(--blue);margin-bottom:20px;">
+          <h4 style="font-family:var(--font-title);font-size:1rem;font-weight:800;text-transform:uppercase;color:#fff;margin-bottom:12px;">Submission Guidelines</h4>
+          <ul style="list-style:none;display:flex;flex-direction:column;gap:10px;">
+            <li style="font-family:var(--font-ui);font-size:.78rem;color:rgba(255,255,255,.7);display:flex;gap:8px;align-items:flex-start;">
+              <i class="bi bi-check2" style="color:var(--blue-light);flex-shrink:0;margin-top:2px;"></i>
+              1200–2000 words recommended
+            </li>
+            <li style="font-family:var(--font-ui);font-size:.78rem;color:rgba(255,255,255,.7);display:flex;gap:8px;align-items:flex-start;">
+              <i class="bi bi-check2" style="color:var(--blue-light);flex-shrink:0;margin-top:2px;"></i>
+              Original, analytical, evidence-based
+            </li>
+            <li style="font-family:var(--font-ui);font-size:.78rem;color:rgba(255,255,255,.7);display:flex;gap:8px;align-items:flex-start;">
+              <i class="bi bi-check2" style="color:var(--blue-light);flex-shrink:0;margin-top:2px;"></i>
+              Cite all sources with hyperlinks
+            </li>
+            <li style="font-family:var(--font-ui);font-size:.78rem;color:rgba(255,255,255,.7);display:flex;gap:8px;align-items:flex-start;">
+              <i class="bi bi-x" style="color:#dc3545;flex-shrink:0;margin-top:2px;"></i>
+              No AI-generated content
+            </li>
+            <li style="font-family:var(--font-ui);font-size:.78rem;color:rgba(255,255,255,.7);display:flex;gap:8px;align-items:flex-start;">
+              <i class="bi bi-x" style="color:#dc3545;flex-shrink:0;margin-top:2px;"></i>
+              No plagiarism
+            </li>
+            <li style="font-family:var(--font-ui);font-size:.78rem;color:rgba(255,255,255,.7);display:flex;gap:8px;align-items:flex-start;">
+              <i class="bi bi-check2" style="color:var(--blue-light);flex-shrink:0;margin-top:2px;"></i>
+              Clear, relevant featured image
+            </li>
+          </ul>
+        </div>
+        <div class="info-box">
+          <h4><i class="bi bi-clock"></i> Review Timeline</h4>
+          <p style="text-align: justify;hyphens: auto;" >Submitted posts are reviewed by our editorial team within <strong>2–3 business days</strong>. You'll see the status in your dashboard.</p>
+        </div>
+        <div class="info-box" style="margin-top:12px;">
+          <h4><i class="bi bi-question-circle"></i> Questions?</h4>
+          <p>Email us at </br> <a href="mailto:contactglobalsouthobserver@gmail.com" style="color:var(--blue);word-break: break-all; font-size: 11px;">contactglobalsouthobserver@gmail.com</a></p>
+        </div>
+      </aside>
+
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  // Live word count
+  const content = document.querySelector('textarea[name="content"]');
+  const counter = document.getElementById('word-count');
+  if (content && counter) {
+    function updateCount() {
+      const words = content.value.trim().split(/\s+/).filter(w => w.length > 0).length;
+      counter.textContent = words + ' words';
+      counter.style.color = words < 200 ? '#dc3545' : words < 1200 ? '#ffc107' : '#28a745';
+    }
+    content.addEventListener('input', updateCount);
+    updateCount();
+  }
+</script>
+{% endblock %}

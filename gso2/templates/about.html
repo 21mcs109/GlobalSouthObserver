@@ -1,0 +1,132 @@
+{% extends 'base.html' %}
+{% block title %}About Us{% endblock %}
+{% block meta_description %}Global South Observer — About Us, Who We Are, What We Offer, Terms & Conditions, Privacy Policy, Third Party Material, Subscription & Refund Policy.{% endblock %}
+
+{% block content %}
+
+<div class="page-hero">
+  <div class="container">
+    <h1 class="page-hero-title"><span>About</span> Us</h1>
+    <p class="page-hero-subtitle">Voice of Global South | Academic Research | Leadership Training | Political Consultancy</p>
+  </div>
+</div>
+
+<!-- Sub-navbar -->
+<nav class="sub-navbar" aria-label="About sections">
+  <div class="sub-navbar-inner">
+    {% for sec in about_sections %}
+    <button class="sub-nav-btn {% if forloop.first %}active{% endif %}" data-target="{{ sec.id }}">{{ sec.label }}</button>
+    {% endfor %}
+  </div>
+</nav>
+
+<div class="container">
+
+  <!-- ABOUT US -->
+  <section class="content-section" id="about-us">
+    <h2>About Us</h2>
+    <p>We are a leading <strong>academic research, leadership training, political consultancy</strong> and <strong>news analysis</strong> based platform which is having eye on the emerging <strong>'Global South'</strong> region. The main focus of this platform is to understand, explore and finding new solutions for challenges prevailing in such areas of global south region like <strong>International relations, geopolitics, security, military strategic affairs, modern warfare &amp; defence technologies, public policy &amp; world governance, Sustainable Development Goals (SDGs), philosophy, science, entertainment, healthcare, biodiversity, blue economy, clean &amp; nuclear energy</strong> etc.</p>
+    {% comment %} <div class="stats-row" style="margin:32px 0;">
+      <div class="stat-item"><div class="stat-num">130+</div><div class="stat-label">Countries Covered</div></div>
+      <div class="stat-item"><div class="stat-num">500+</div><div class="stat-label">Research Articles</div></div>
+      <div class="stat-item"><div class="stat-num">45+</div><div class="stat-label">Expert Advisors</div></div>
+      <div class="stat-item"><div class="stat-num">8+</div><div class="stat-label">Years Active</div></div>
+    </div> {% endcomment %}
+  </section>
+
+  <!-- WHO WE ARE -->
+  <section class="content-section" id="who-we-are">
+    <h2>Who We Are?</h2>
+    <p><strong>Global South Observer (GSO)</strong> is a <strong>web-based 'think-tank'</strong> founded under the guidelines of group of like-minded academicians, researcher, retired civil servants, Industrialist and senior community members to build a repository of shared knowledge and wisdom on global south region. <strong>GSO</strong> endeavors to promote the research work of <strong>young researchers, early academicians</strong>, <strong>civil servants, young entrepreneurs</strong> and <strong>senior community members</strong> by giving them the opportunity to publish their <strong>opinions</strong>, <strong>research articles, commentaries, news analysis</strong>, <strong>book reviews</strong> to building new narratives for global south region.</p>
+    <div class="info-box" style="margin-top:20px;">
+      <h4>Our Core Focus Areas</h4>
+      <p>International relations, geopolitics, security, military strategic affairs, modern warfare &amp; defence technologies, public policy &amp; world governance, SDGs, philosophy, science, entertainment, healthcare, biodiversity, blue economy, clean &amp; nuclear energy.</p>
+    </div>
+  </section>
+
+  <!-- WHAT WE OFFER -->
+  <section class="content-section" id="what-we-offer">
+    <h2>What We Are Offering?</h2>
+    <ul>
+      <li><strong>Professional Membership:</strong> We are offering 'Professional Membership' in our organization, where the team members will get opportunities to write with us and share their knowledge and wisdom for broader purposes.</li>
+      <li><strong>Research Internships:</strong> The platform is offering the 'Research Internships' particularly for young scholars those who involved in beginning stage of their academic and research career.</li>
+      <li><strong>Leadership Programs:</strong> The platform also provide the certificate based 'Leadership Programs' to trained the future leaders to perform well in various fields such as political, corporate and industry leadership, educational and community leadership programs and for various ground level NGOs.</li>
+      <li><strong>Political Consultancy:</strong> Our team is also offering 'Political Consultancy' from village to national and global level leadership, inculcate democratic practices and values, expert advises to understand local challenges and providing platform for young scholars of developing nations of global south.</li>
+      <li><strong>Subscription Based Access:</strong> We are also providing 'Subscription based access' to our readers to get updated Annual research reports, research archive, Journal/magazine access, newsletters and policy documents access related to global south countries.</li>
+      <li><strong>Seminar &amp; Webinar Sessions:</strong> Global South Observer also organizes 'Seminar &amp; Webinar Sessions, Interviews, Podcasts' on various recent issues related to international relations, geopolitics, foreign policy, public policy and governance, military warfare &amp; new technologies and traditional and non-traditional security related issues of global south region.</li>
+      <li><strong>Policy Formulation Training:</strong> We also trained the young scholars regarding 'Policy Formulation, Policy Implementation and process of Policy Analysis' in the various disciplines such as politics, history, sociology, economy, industry, climate, foreign policy, health science &amp; educational issues of global south region.</li>
+      <li><strong>Research Associate / Assistant:</strong> Young aspirants can join 'Research Associate', or 'Research Assistant' to contribute in the research related studies and publish their findings on the Global South Observer platform.</li>
+      <li><strong>Partnership &amp; MOUs:</strong> Global South Observer is committed to increase our 'Partnership &amp; MOUs' with academic &amp; research institutions, industries, Universities and civil society groups and NGOs to encourage Global South related academic studies and new narratives.</li>
+      <li><strong>Consultant Support:</strong> Global South Observer can also provide 'Consultant Support' to industry/MSMEs/start-ups, especially for major and minor projects associated with global south related issues.</li>
+    </ul>
+    <div style="margin-top:24px;display:flex;gap:14px;flex-wrap:wrap;">
+      <a href="{% url 'internships' %}" class="btn-primary"><i class="bi bi-briefcase"></i> Research Internships</a>
+      <a href="{% url 'political' %}" class="btn-black"><i class="bi bi-bar-chart"></i> Political Consultancy</a>
+      <a href="{% url 'subscribe' %}" class="btn-outline-blue"><i class="bi bi-envelope"></i> Subscribe Us</a>
+    </div>
+  </section>
+
+  <!-- TERMS & CONDITIONS -->
+  <section class="content-section" id="terms">
+    <h2>Our Terms &amp; Conditions</h2>
+    <p>This website is operated and handled by <strong>'Global South Observer' (GSO)</strong> research team. The terms <strong>"platform", "we", "us"</strong> and <strong>"our"</strong> referred to <strong>Global South Observer' research team</strong>. The information, event declaration, tools and services available from this site to you including the user and terms &amp; conditioned stated here.</p>
+    <ul>
+      <li>By visiting our website, <strong>donating</strong> or <strong>subscriptions</strong> for 'Global South Observer', you engage in our 'Service' and agree to be bound by our terms and conditions. If you do not agree to all the terms and conditions of this agreement, then you may not access the website or use any services.</li>
+      <li>Any <strong>new features</strong> or <strong>tools</strong> which are added to the current website shall also be subject to the Terms of Service. You can review the most current version of the Terms of Service at any time on this page.</li>
+      <li>We <strong>reserve the right to update, change or replace</strong> any part of these Terms of Service by posting updates and/or changes to our website.</li>
+      <li>It is your responsibility to <strong>check this page periodically</strong> for changes. Your continued use of or access to the website following the posting of any changes constitutes acceptance of those changes.</li>
+      <li>We are not responsible if any <strong>information, data, news analysis</strong> made available on this site is not accurate, complete or contemporary in nature. The information, data, news analysis and opinion or findings on this site is provided for general information only and should not be relied the sole basis for making decisions without consulting primary sources.</li>
+      <li>We reserve the right to <strong>modify the contents, data, news analysis or any publish material</strong> of this site at any time, if it looks not suitable as per our terms and conditions/privacy policy.</li>
+    </ul>
+  </section>
+
+  <!-- PRIVACY POLICY -->
+  <section class="content-section" id="privacy">
+    <h2>Privacy Policy</h2>
+    <p><strong>Global South Observer (GSO)</strong> is an online platform to share your <strong>perspective, views, opinion, research findings</strong> on International relations &amp; geopolitics, security &amp; military affairs, strategic &amp; defence technologies, public policy &amp; world governance, Sustainable Development Goals (SDGs), philosophy, Science, entertainment, healthcare, biodiversity, blue economy, clean &amp; nuclear energy etc. This platform is an initiative of a <strong>group of like-minded academicians, researcher, civil servants, Industry experts and senior community member's</strong>.</p>
+    <ul>
+      <li>When you <strong>subscribe to GSO</strong>, we may collect the personal information you give us, such as your <strong>email address</strong> and <strong>mobile number</strong>.</li>
+      <li>When you browse our contents on <strong>GSO website</strong>, we may automatically receive your computer's <strong>Internet Protocol (IP) address</strong>. The GSO team may use your email and mobile numbers with your permission.</li>
+      <li>Our team may <strong>retain your personal data</strong> only for as long as is necessary for the purposes set out in this Privacy Policy. Although, you have the <strong>right to delete</strong> or request that we assist in deleting the personal data that we have collected about you.</li>
+      <li>You may <strong>update, amend, delete your information</strong> or may also <strong>contact us to request delete</strong> any personal information that you have provided to us.</li>
+      <li>If this platform is involved in a <strong>merger, acquisition</strong> or <strong>sale</strong>, your personal data may be transferred. We will provide notice before your personal data is transferred and becomes subject to a different privacy policy.</li>
+      <li>Our service <strong>does not address any children</strong> or <strong>anyone under the age of 14 years</strong>.</li>
+    </ul>
+  </section>
+
+  <!-- THIRD PARTY MATERIAL -->
+  <section class="content-section" id="third-party">
+    <h2>Third Party Material</h2>
+    <p>Certain content and services available via our services on <strong>'Global South Observer' (GSO)</strong> website may include materials from third parties. In such cases <strong>authors, researchers and individuals are solely responsible</strong> for using accurate <strong>bibliographies, references, citations, hyperlinks</strong> for given consideration of third party materials. Hence, authors who wish to write for this website must ensure the following instructions related to Third Party Material.</p>
+    <ul>
+      <li>Third-party <strong>links, pictures, tables, graphs, data, reports, whitepapers, monographs</strong>, <strong>research books</strong> etc. on this site may direct you to third-party websites that are not affiliated with us. We are not responsible for <strong>examining or evaluating the content or accuracy of facts, originality, authenticities</strong>.</li>
+      <li>We do not provide any <strong>license, legal approval</strong> and will not have any <strong>liability or responsibility</strong> for any third-party materials such as <strong>data, products, services</strong> and <strong>websites use</strong>.</li>
+      <li>GSO team is not answerable for any <strong>harm or damages</strong> related to <strong>buying, products and goods, services, resources, content</strong>, or <strong>any other transactions</strong> made in connection with any third-party websites.</li>
+      <li>Our team may do not have obligation to <strong>monitor, edit or remove content</strong> that we determine in our sole discretion are <strong>unlawful, offensive, threatening, defamatory, pornographic, obscene</strong> or <strong>violates any party's Intellectual Property Rights (IPRs)</strong> or these Terms of Service.</li>
+      <li>You may agree that your <strong>comments, news analysis</strong> or <strong>research related work publish</strong> on our website will not violate any right of third-party materials, including <strong>patent, copyright, trademark, privacy, another personal's proprietary right</strong>.</li>
+      <li>You may not use a <strong>false e-mail address, contact detail</strong> or <strong>pretend to be someone other than yourself</strong>. For the act of <strong>misleading us</strong> or <strong>third-parties</strong> may solely your responsibility.</li>
+    </ul>
+  </section>
+
+  <!-- SUBSCRIPTION & REFUND POLICY -->
+  <section class="content-section" id="subscription">
+    <h2>Subscription &amp; Refund Policy</h2>
+    <h3>Subscription Payment</h3>
+    <p><strong>'Global South Observer' (GSO)</strong> only use <strong>Paytm/Google pay/UPI</strong> payment scan system for processing payments. We may accept the <strong>Debit/Credit card payments</strong> in certain conditions. <strong>'Global South Observer' (GSO)</strong> website do not store your card data on servers. Your transaction data is only used as long as it is necessary to complete your transaction. After compilation of your transaction, your purchase transaction information is not saved.</p>
+    <ul>
+      <li>We reserve all the right to <strong>refuse, cancel</strong> and <strong>revise any subscription</strong>. If we make a change to or cancel any subscription, we may attempt to notify you by contacting the e-mail, phone number provided at the time the subscription.</li>
+      <li>If you agree to provide <strong>current, complete</strong>, <strong>accurate purchase</strong> and <strong>account information</strong> for all purchases made at our store. You agree to promptly update your account and other information, including your <strong>email address</strong> and <strong>credit card numbers</strong> and expiration dates so that we can complete your transactions and contact you as needed.</li>
+    </ul>
+    <h3>Refund Policy</h3>
+    <ul>
+      <li><strong>Global South Observer (GSO)</strong> platform is <strong>not responsible any wrong payment</strong> or other reasons. Hence, Subscribed <strong>funds will not refund</strong> from Global South Observer platform.</li>
+      <li>If any <strong>products</strong> or <strong>services are sold</strong> on the GSO website will not for return/refund. <strong>Late or missing</strong> refunds are not applicable.</li>
+      <li><strong>No items/products</strong> are sold on this website yet. There is <strong>no exchange of goods/products</strong> on Global South Observer platform website. We also do not offer any gifts to our readers and donors.</li>
+    </ul>
+    <div style="margin-top:20px;">
+      <a href="{% url 'subscribe' %}" class="btn-primary"><i class="bi bi-envelope-check"></i> Subscribe Now</a>
+    </div>
+  </section>
+
+</div>
+{% endblock %}

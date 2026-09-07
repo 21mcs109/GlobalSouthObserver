@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+{% block title %}Research Internship{% endblock %}
+
+{% block content %}
+<div class="page-hero">
+  <div class="container">
+    <h1 class="page-hero-title"><span>Research</span> Internship</h1>
+    <p class="page-hero-subtitle">Certificate Courses &bull; Leadership Programs &bull; Seminars, Workshops &amp; Conferences</p>
+  </div>
+</div>
+
+<nav class="sub-navbar" aria-label="Internship sections">
+  <div class="sub-navbar-inner">
+    {% for sec in internship_sections %}
+    <button class="sub-nav-btn {% if forloop.first %}active{% endif %}" data-target="{{ sec.id }}">{{ sec.label }}</button>
+    {% endfor %}
+  </div>
+</nav>
+
+<div class="container">
+
+  <!-- CERTIFICATE COURSES -->
+  <section class="content-section" id="certificate">
+    <h2>Certificate Courses</h2>
+    <p>Global South Observer (GSO) are offering online short-term certificate courses, specialized educational programs designed to provide learners with focused knowledge and practical skills in a particularly on research areas such as <strong>International relations, geopolitics, security, military strategic affairs, modern warfare &amp; defence technologies, public policy &amp; world governance, Sustainable Development Goals (SDGs), philosophy, science, entertainment, healthcare, biodiversity, blue economy, clean &amp; nuclear energy</strong> etc.</p>
+    <p>The online courses may include <strong>recorded lectures, live sessions, discussion forums, digital assessments, practical assignments, and online examinations.</strong> For students and researchers, industry people these courses can complement formal academic education by developing technical, analytical, professional, and research-related competencies. The certificate courses which will take less time and provide targeted training for the <strong>undergraduate, postgraduate, Ph.D.</strong> and <strong>early career academicians, researchers and entrepreneurs.</strong></p>
+    <h3>Benefits of Certificate Courses</h3>
+    <ul>
+      <li><strong>Research &amp; Skill Development:</strong> Students/researcher can gain practical and technical research skills related to their academic discipline such as research methodologies, research design, statistics &amp; quantitative data analysis, qualitative research methods, literature review and systematic review techniques, research ethics and academic integrity, data management and visualization, programming and computational methods, role of Artificial Intelligence (AI) in other fields, reference management and scholarly publishing, Intellectual property and technology transfer, grant writing and research proposal development.</li>
+      <li><strong>Academic &amp; Communication Enrichment:</strong> Certificate courses allow students to study specialized topics beyond their regular syllabus. Academic writing, scientific communication and increase students' confidence in applying theoretical knowledge to practical problems.</li>
+      <li><strong>Artificial Intelligence (AI) &amp; New Technologies:</strong> Courses in areas such as artificial intelligence, data science, digital tools, military calculation, election analysis, public policy &amp; governance analysis, statistical analysis can help students remain current.</li>
+      <li><strong>Short Duration &amp; Specialized Learning:</strong> Most certificate courses can be completed more quickly than degree programs. Learners can focus on a particular skill or subject. Many courses are available online and can be completed alongside regular academic or research work.</li>
+      <li><strong>Practical &amp; Professional Orientation:</strong> Courses often include assignments, projects, case studies, and software-based exercises. Certificates can provide evidence of additional training and competency. Courses may connect learners with instructors, professionals, researchers, and other students.</li>
+      <li><strong>Career Enhancement &amp; Employability:</strong> Industry-oriented certificates can strengthen a student's résumé and demonstrate additional competencies to prospective employers. Short-term courses allow students to explore potential career fields before committing to longer programs.</li>
+    </ul>
+    <a href="{% url 'contact' %}" class="btn-primary" style="margin-top:16px;display:inline-flex;"><i class="bi bi-envelope"></i> Enquire About Courses</a>
+  </section>
+
+  <!-- LEADERSHIP PROGRAMS -->
+  <section class="content-section" id="leadership-programs">
+    <h2>Leadership Programs</h2>
+    <p>Global South Observer (GSO) offers leadership programs which are structured to help leadership qualities among <strong>students, researchers, teachers, Industry professionals</strong>, and local village level to national level <strong>political leaders</strong> to develop the knowledge, skills, attitudes and confidence which required leading <strong>individuals, teams, organizations, and research projects</strong> effectively. For students and researchers, leadership development can also improve their ability to manage <strong>academic projects, research teams, student organizations, laboratories, community initiatives, and professional responsibilities.</strong></p>
+    <p>Our leadership programs are not limited to teach how to holding a formal position or administrative responsibility? But, it also involves the ability to <strong>influence others positively</strong>, <strong>diplomatically, soft spoken informed decisions, solve problems, communicate effectively</strong>, and <strong>accept responsibility from village to national and global level</strong> to achieve higher goals.</p>
+    <h3>Key Objectives</h3>
+    <ul>
+      <li>Develop effective leadership skills and competencies</li>
+      <li>Build confidence and self-awareness</li>
+      <li>Improve communication skills</li>
+      <li>Encourage teamwork and collaboration</li>
+      <li>Develop decision-making and problem-solving abilities</li>
+      <li>Promote ethical and responsible leadership</li>
+      <li>Improve conflict-management and negotiation skills</li>
+      <li>Innovation, creativity, new initiatives and support others to prepare themselves in participants for leadership roles in <strong>academic, professional, democratic institutions, NGOs</strong> and lead the civil society groups and movements.</li>
+    </ul>
+
+    <!-- Open Positions -->
+    {% if open_internships %}
+    <h3 style="margin-top:28px;">Open Internship Positions</h3>
+    <div class="three-col" style="margin-top:16px;">
+      {% for job in open_internships %}
+      <div class="service-card" data-animate>
+        <div class="icon"><i class="bi bi-briefcase-fill"></i></div>
+        <h3>{{ job.title }}</h3>
+        <p style="font-size:.75rem;color:var(--blue);font-weight:700;font-family:var(--font-ui);margin-bottom:6px;">{{ job.department }}</p>
+        <p>{{ job.description|truncatechars:120 }}</p>
+        <p style="font-size:.78rem;color:var(--mid-gray);margin-top:8px;font-family:var(--font-ui);"><i class="bi bi-clock"></i> {{ job.get_duration_display }}</p>
+        <a href="#apply" class="btn-primary" style="margin-top:12px;display:inline-flex;font-size:.75rem;padding:8px 16px;">Apply <i class="bi bi-arrow-right"></i></a>
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </section>
+
+  <!-- SEMINARS -->
+  <section class="content-section" id="seminars">
+    <h2>Seminars, Workshops &amp; Conferences</h2>
+    <p>Global South Observer (GSO) organizes regular basis, <strong>seminars, workshops</strong>, and <strong>conferences</strong> to increase joint venture between us and important academic and professional organizations of community. These activities that provide opportunities for <strong>students, researchers, teachers, and industry professionals</strong> to exchange knowledge, develop skills, present ideas, and build professional networks.</p>
+    <p>These activities complement classroom education and formal research by encouraging interaction, discussion, collaboration, and exposure to recent developments in different fields. Participation in seminars, workshops, and conferences helps students/researcher and industry background people to understand <strong>current trends, discover new research areas, interact with experts, and develop confidence in communicating their ideas</strong>. For researchers, these activities are especially valuable because they provide platforms for presenting research findings, receiving feedback, identifying potential collaborators, and keeping up with developments in their disciplines.</p>
+    <div class="three-col" style="margin-top:28px;">
+      <div class="service-card" data-animate><div class="icon"><i class="bi bi-camera-video-fill"></i></div><h3>Online Seminars &amp; Webinars</h3><p>Regular virtual seminars on international relations, geopolitics, foreign policy, public policy, and governance.</p></div>
+      <div class="service-card" data-animate><div class="icon"><i class="bi bi-people-fill"></i></div><h3>Workshops</h3><p>Skill-building workshops on research methodology, policy analysis, data analysis, and academic writing.</p></div>
+      <div class="service-card" data-animate><div class="icon"><i class="bi bi-buildings"></i></div><h3>Conferences</h3><p>Academic conferences bringing together scholars from Global South nations to present research and build networks.</p></div>
+    </div>
+    <a href="{% url 'contact' %}" class="btn-primary" style="margin-top:28px;display:inline-flex;"><i class="bi bi-calendar-event"></i> Register Interest</a>
+  </section>
+
+  <!-- Application Form -->
+  <section class="content-section" id="apply">
+    <h2>Apply Now</h2>
+    <div class="two-col">
+      <div>
+        <p>Submit your application for our Research Internship programme. Shortlisted candidates are contacted within 5 business days.</p>
+        <ul style="margin-top:12px;">
+          <li>Fully remote — apply from anywhere in the world</li>
+          <li>Flexible working hours</li>
+          <li>Certificate &amp; letter of recommendation on completion</li>
+          <li>Mentorship from senior researchers</li>
+          <li>Opportunity to publish research findings on GSO platform</li>
+        </ul>
+      </div>
+      <div class="form-card">
+        <h3>Application Form</h3>
+        {% if messages %}{% for m in messages %}<div class="alert alert-{{ m.tags }}" style="margin-bottom:14px;"><i class="bi bi-check-circle-fill"></i> {{ m }}</div>{% endfor %}{% endif %}
+        <form method="POST" action="{% url 'internships' %}#apply" class="styled-form" novalidate>
+          {% csrf_token %}
+          {% for field in form %}
+          <div class="form-group">
+            <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
+            {{ field }}
+            {% if field.errors %}<div class="field-error">{% for e in field.errors %}<span>{{ e }}</span>{% endfor %}</div>{% endif %}
+          </div>
+          {% endfor %}
+          <button type="submit" class="btn-primary btn-full" style="margin-top:4px;"><i class="bi bi-send"></i> Submit Application</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</div>
+{% endblock %}

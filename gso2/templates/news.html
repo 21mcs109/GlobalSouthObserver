@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% block title %}News Updates{% endblock %}
+
+{% block content %}
+<div class="page-hero">
+  <div class="container">
+    <h1 class="page-hero-title"><span>News</span> Updates</h1>
+    <p class="page-hero-subtitle">Articles by our authors — Indo-Pacific &bull; South Asia &bull; Africa &bull; Latin America &bull; Europe &bull; Middle East</p>
+  </div>
+</div>
+
+<nav class="sub-navbar" aria-label="News categories">
+  <div class="sub-navbar-inner">
+    <a href="{% url 'news' %}"
+       class="sub-nav-btn {% if current_category == 'all' or not current_category %}active{% endif %}"
+       data-category="all">All Articles</a>
+    {% for cat in news_categories %}
+    <a href="{% url 'news' %}?category={{ cat.slug }}"
+       class="sub-nav-btn {% if cat.slug == current_category %}active{% endif %}"
+       data-category="{{ cat.slug }}">{{ cat.label }}</a>
+    {% endfor %}
+  </div>
+</nav>
+
+<section class="section">
+  <div class="container">
+
+    {% if total == 0 %}
+    <div style="text-align:center;padding:80px 20px;">
+      <i class="bi bi-newspaper" style="font-size:4rem;color:var(--blue);opacity:.2;display:block;margin-bottom:20px;"></i>
+      <h2 style="font-family:var(--font-title);font-size:2rem;text-transform:uppercase;margin-bottom:10px;">No Articles Yet</h2>
+      <p style="color:var(--mid-gray);max-width:480px;margin:0 auto 24px;">No published articles in this category yet. Be the first to contribute!</p>
+      <a href="{% url 'author_register' %}" class="btn-primary"><i class="bi bi-pencil-square"></i> Become an Author</a>
+    </div>
+    {% else %}
+    <p style="font-family:var(--font-ui);font-size:.8rem;color:var(--mid-gray);margin-bottom:20px;">
+      Showing {{ posts|length }} of {{ total }} articles
+      {% if current_category and current_category != 'all' %}in <strong>{{ current_category|title }}</strong>{% endif %}
+    </p>
+
+    <div class="news-grid" id="news-grid">
+      {% for post in posts %}
+      <article class="news-card" data-animate>
+        <div class="card-img-wrap">
+          <a href="{{ post.get_absolute_url }}">
+            <img src="{{ post.image.url }}" alt="{{ post.title }}" loading="lazy"
+                 onerror="this.src='/static/images/news-placeholder.svg'"/>
+          </a>
+          <span class="card-source">{{ post.get_category_display }}</span>
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">
+            <a href="{{ post.get_absolute_url }}">{{ post.title|truncatechars:90 }}</a>
+          </h3>
+          <p class="card-desc">{{ post.content|truncatechars:130 }}</p>
+          <div class="card-meta">
+            <span><i class="bi bi-person"></i>
+              <a href="{{ post.author.get_absolute_url }}" style="color:var(--blue);">{{ post.author }}</a>
+            </span>
+            <span><i class="bi bi-calendar3"></i> {{ post.published_at|date:"d M Y" }}</span>
+            <span><i class="bi bi-eye"></i> {{ post.views }}</span>
+          </div>
+          <a href="{{ post.get_absolute_url }}" class="card-read-more">Read More <i class="bi bi-arrow-right"></i></a>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+
+    <!-- Pagination -->
+    <div class="pagination">
+      {% if has_prev %}
+      <a href="?category={{ current_category }}&page={{ current_page|add:'-1' }}" class="page-btn"><i class="bi bi-chevron-left"></i> Prev</a>
+      {% endif %}
+      <span class="page-info">Page {{ current_page }}</span>
+      {% if has_next %}
+      <a href="?category={{ current_category }}&page={{ current_page|add:'1' }}" class="page-btn">Next <i class="bi bi-chevron-right"></i></a>
+      {% endif %}
+    </div>
+    {% endif %}
+
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+{% block title %}Subscribe Us{% endblock %}
+
+{% block content %}
+<div class="page-hero">
+  <div class="container">
+    <h1 class="page-hero-title"><span>Subscribe</span> Us</h1>
+    <p class="page-hero-subtitle">Membership &bull; Research Archive &bull; Journal &bull; Policy Documents &bull; Annual Reports</p>
+  </div>
+</div>
+
+<nav class="sub-navbar" aria-label="Subscribe sections">
+  <div class="sub-navbar-inner">
+    {% for sec in subscribe_sections %}
+    <button class="sub-nav-btn {% if forloop.first %}active{% endif %}" data-target="{{ sec.id }}">{{ sec.label }}</button>
+    {% endfor %}
+  </div>
+</nav>
+
+<div class="container">
+
+  <section class="content-section" id="membership">
+    <h2>Subscribe for Membership</h2>
+    <div class="two-col">
+      <div>
+        <p>Join Global South Observer as a <strong>Professional Member</strong> and gain access to our full suite of research resources, publications, and community benefits. Our membership is open to academics, researchers, civil servants, industry professionals, and all those committed to advancing knowledge on Global South affairs.</p>
+        <ul>
+          <li>Full access to our Research Archive and all published articles</li>
+          <li>Access to the <strong>Journal of Global South Quarterly</strong></li>
+          <li>New Policy Documents as they are released</li>
+          <li>Annual Reports and Research Summaries</li>
+          <li>Priority invitation to Seminars, Webinars, and Conferences</li>
+          <li>Newsletter with weekly research briefs and analysis</li>
+          <li>Opportunity to publish your research on GSO platform</li>
+        </ul>
+        <div class="info-box" style="margin-top:20px;">
+          <h4>Payment Methods</h4>
+          <p>We accept Paytm / Google Pay / UPI payments. Debit/Credit card payments may be accepted in certain conditions. Please refer to our <a href="{% url 'about' %}#subscription">Subscription &amp; Refund Policy</a>.</p>
+        </div>
+      </div>
+      <div class="form-card">
+        <h3><i class="bi bi-envelope-heart-fill"></i> Subscribe Now</h3>
+        {% if messages %}{% for m in messages %}<div class="alert alert-{{ m.tags }}" style="margin-bottom:14px;"><i class="bi bi-check-circle-fill"></i> {{ m }}</div>{% endfor %}{% endif %}
+        <form method="POST" action="{% url 'subscribe' %}" class="styled-form" novalidate>
+          {% csrf_token %}
+          {% for field in form %}
+          <div class="form-group">
+            <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
+            {{ field }}
+            {% if field.errors %}<div class="field-error">{% for e in field.errors %}<span>{{ e }}</span>{% endfor %}</div>{% endif %}
+          </div>
+          {% endfor %}
+          <button type="submit" class="btn-primary btn-full"><i class="bi bi-envelope-check"></i> Subscribe — It's Free</button>
+          <p class="form-note" style="margin-top:10px;"><i class="bi bi-shield-check"></i> We respect your privacy. Unsubscribe anytime. No spam.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section class="content-section" id="archive">
+    <h2>Research Archived</h2>
+    <p>Our Research Archive contains all published articles, commentaries, opinions, book reviews, and policy briefs produced by GSO researchers and contributors since our founding. Subscribers gain full access to this growing repository of scholarship on Global South affairs.</p>
+    <div class="three-col" style="margin-top:20px;">
+      <div class="service-card" data-animate><div class="icon"><i class="bi bi-archive-fill"></i></div><h3>Research Articles</h3><p>Peer-reviewed and editorially reviewed research articles on geopolitics, security, diplomacy, and governance.</p></div>
+      <div class="service-card" data-animate><div class="icon"><i class="bi bi-chat-quote-fill"></i></div><h3>Commentaries &amp; Opinions</h3><p>Expert opinions, commentaries, and analyses on current events affecting the Global South region.</p></div>
+      <div class="service-card" data-animate><div class="icon"><i class="bi bi-book-fill"></i></div><h3>Book Reviews</h3><p>Critical reviews of important academic works on international relations, foreign policy, and development.</p></div>
+    </div>
+  </section>
+
+  <section class="content-section" id="journal">
+    <h2>Journal of Global South Quarterly</h2>
+    <p>The <strong>Journal of Global South Quarterly</strong> is GSO's flagship academic publication, featuring original research, policy analysis, and critical perspectives on developments across the Global South. Published quarterly, the Journal serves as a premier outlet for scholarship on issues affecting developing nations worldwide.</p>
+    <div class="info-box">
+      <h4>Journal Scope</h4>
+      <p>International relations &amp; modern diplomacy, geopolitics &amp; security, defense &amp; modern warfare, public policy &amp; world governance, artificial intelligence &amp; economy, environment &amp; sustainable development, philosophy &amp; science, literature &amp; entertainment, healthcare, biodiversity, and blue economy.</p>
+    </div>
+    <p style="margin-top:16px;">To submit a paper for consideration in the Journal, please follow our <a href="{% url 'contact' %}#write-for-us">editorial guidelines</a> and send your manuscript to <a href="mailto:contactglobalsouthobserver@gmail.com">contactglobalsouthobserver@gmail.com</a>.</p>
+  </section>
+
+  <section class="content-section" id="policy-docs">
+    <h2>New Policy Documents</h2>
+    <p>Subscribers receive access to new policy documents, briefing papers, and working papers produced by the GSO research team. These documents provide in-depth analysis and recommendations on key policy challenges facing Global South nations.</p>
+    <div class="three-col" style="margin-top:20px;">
+      <div class="service-card" data-animate><div class="icon"><i class="bi bi-file-earmark-text-fill"></i></div><h3>Policy Briefs</h3><p>Concise policy-focused documents providing analysis and recommendations on specific issues.</p></div>
+      <div class="service-card" data-animate><div class="icon"><i class="bi bi-file-earmark-richtext-fill"></i></div><h3>Working Papers</h3><p>Preliminary research findings and analysis shared for discussion and comment before final publication.</p></div>
+      <div class="service-card" data-animate><div class="icon"><i class="bi bi-file-earmark-bar-graph-fill"></i></div><h3>Research Reports</h3><p>Comprehensive research reports on specific topics, regions, or policy areas of concern to the Global South.</p></div>
+    </div>
+  </section>
+
+  <section class="content-section" id="annual">
+    <h2>Annual Reports</h2>
+    <p>The Global South Observer Annual Report provides a comprehensive overview of our activities, research outputs, programme highlights, partnerships, and impact over the preceding year. Annual Reports are available to all subscribers and provide transparency on our work and direction.</p>
+    <div class="info-box">
+      <h4>Annual Report Contents</h4>
+      <p>Research highlights and publications, programme summaries (internships, leadership, seminars), partnership updates, financial transparency (where applicable), team updates, plans and priorities for the coming year.</p>
+    </div>
+    <a href="{% url 'subscribe' %}#membership" class="btn-primary" style="margin-top:16px;display:inline-flex;"><i class="bi bi-download"></i> Subscribe to Access</a>
+  </section>
+
+</div>
+{% endblock %}
