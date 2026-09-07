@@ -1,5 +1,9 @@
 import os
 from pathlib import Path
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -108,9 +112,9 @@ MESSAGE_TAGS = {
     messages.ERROR:   'error',
 }
 CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': os.environ.get('qnrygwte'),
-    'API_KEY': os.environ.get('175857327126965'),
-    'API_SECRET': os.environ.get('**********')
+    'CLOUD_NAME': os.environ.get('CLOUDINARY_CLOUD_NAME'),
+    'API_KEY': os.environ.get('CLOUDINARY_API_KEY'),
+    'API_SECRET': os.environ.get('CLOUDINARY_API_SECRET')
 }
 STORAGES = {
     "default": {
