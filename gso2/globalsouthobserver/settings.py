@@ -14,8 +14,8 @@ except ImportError:
     pass
 
 SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-gso-2025-key-change-in-production!')
-# DEBUG = os.environ.get('DEBUG', 'False').lower() == 'true'
-DEBUG=True
+DEBUG = os.environ.get('DEBUG', 'False').lower() == 'true'
+# DEBUG=True
 ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
