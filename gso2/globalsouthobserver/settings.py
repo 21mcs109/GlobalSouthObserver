@@ -22,6 +22,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'observer',
+    'cloudinary_storage',
+    'cloudinary',   
 ]
 
 MIDDLEWARE = [
@@ -105,7 +107,20 @@ MESSAGE_TAGS = {
     messages.WARNING: 'warning',
     messages.ERROR:   'error',
 }
-
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': os.environ.get('qnrygwte'),
+    'API_KEY': os.environ.get('175857327126965'),
+    'API_SECRET': os.environ.get('**********')
+}
+STORAGES = {
+    "default": {
+        "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
+    },
+    "staticfiles": {
+        # Keep your existing static files backend here (e.g., WhiteNoise)
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
 # ── Auth redirects ────────────────────────────────────────────────────────────
 LOGIN_URL          = '/author/login/'
 LOGIN_REDIRECT_URL = '/author/dashboard/'
