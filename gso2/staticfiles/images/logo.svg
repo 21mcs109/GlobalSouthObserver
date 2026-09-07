@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 240" width="220" height="240">
+  <!-- Bird body - soaring eagle silhouette -->
+  <g fill="#000000">
+    <!-- Main body -->
+    <ellipse cx="110" cy="52" rx="18" ry="10" transform="rotate(-5,110,52)"/>
+    <!-- Head -->
+    <ellipse cx="128" cy="44" rx="10" ry="9"/>
+    <!-- Beak -->
+    <polygon points="138,42 148,46 136,50"/>
+    <!-- Left wing - extended -->
+    <path d="M95,50 C70,38 40,28 15,32 C30,40 55,50 80,55 Z"/>
+    <path d="M95,50 C72,45 45,40 20,48 C40,52 68,55 90,57 Z"/>
+    <!-- Right wing - extended -->
+    <path d="M122,50 C145,38 170,28 195,35 C182,42 158,50 135,54 Z"/>
+    <path d="M122,52 C148,46 172,42 198,50 C175,54 148,56 130,57 Z"/>
+    <!-- Tail -->
+    <path d="M96,58 C90,65 85,72 88,78 C93,73 98,66 105,62 Z"/>
+    <path d="M108,62 C108,70 106,78 110,82 C114,76 113,68 115,62 Z"/>
+    <!-- Talons hint -->
+    <path d="M100,75 C98,80 95,83 98,85 C101,82 103,79 105,75 Z"/>
+  </g>
+
+  <!-- Speed/flow lines below bird -->
+  <g stroke="#000000" fill="none" stroke-linecap="round">
+    <path d="M45,90 Q110,85 175,90" stroke-width="2.5"/>
+    <path d="M35,98 Q110,92 185,98" stroke-width="2"/>
+    <path d="M25,106 Q110,100 195,106" stroke-width="1.5"/>
+  </g>
+
+  <!-- Blue chevron/wave stripe -->
+  <path d="M10,115 L110,105 L210,115 L210,132 L110,122 L10,132 Z" fill="#1565C0"/>
+
+  <!-- GLOBAL SOUTH text -->
+  <text x="110" y="158" text-anchor="middle" font-family="Arial Black, Arial, sans-serif"
+        font-weight="900" font-size="21" fill="#000000" letter-spacing="1">GLOBAL SOUTH</text>
+
+  <!-- OBSERVER text -->
+  <text x="110" y="182" text-anchor="middle" font-family="Arial Black, Arial, sans-serif"
+        font-weight="900" font-size="21" fill="#000000" letter-spacing="1">OBSERVER</text>
+
+  <!-- Divider line -->
+  <line x1="20" y1="190" x2="200" y2="190" stroke="#1565C0" stroke-width="1.5"/>
+
+  <!-- Voice of Global South -->
+  <text x="110" y="208" text-anchor="middle" font-family="Arial, sans-serif"
+        font-weight="400" font-size="11" fill="#333333" letter-spacing="0.5">(VOICE OF GLOBAL SOUTH)</text>
+</svg>
