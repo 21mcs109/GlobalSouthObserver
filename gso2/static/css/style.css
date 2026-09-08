@@ -7,7 +7,8 @@
 
 @font-face {
   font-family: 'BernardMT';
-  src: local('Bernard MT Condensed'), local('BernardMTCondensed');
+  src: url('../fonts/BernardMT.woff2') format('woff2');
+  /* src: local('Bernard MT Condensed'), local('BernardMTCondensed'); */
   font-display: swap;
 }
 
@@ -24,7 +25,7 @@
   --border:      #cccccc;
   --white:       #ffffff;
   --cream:       #fafafa;
-  --font-title:  'BernardMT';
+  --font-title:   'BernardMT', 'Barlow Condensed', 'Arial Narrow', Arial, sans-serif;
   --font-body:   'Source Serif 4', Georgia, 'Times New Roman', serif;
   --font-ui:     'Open Sans', Arial, sans-serif;
   --navbar-h:    52px;
