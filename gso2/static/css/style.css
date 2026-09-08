@@ -24,7 +24,7 @@
   --border:      #cccccc;
   --white:       #ffffff;
   --cream:       #fafafa;
-  --font-title:  'BernardMT', 'Barlow Condensed', 'Arial Narrow', Arial, sans-serif;
+  --font-title:  'BernardMT';
   --font-body:   'Source Serif 4', Georgia, 'Times New Roman', serif;
   --font-ui:     'Open Sans', Arial, sans-serif;
   --navbar-h:    52px;
@@ -83,7 +83,8 @@ button { cursor: pointer; font-family: var(--font-ui); border: none; }
 
 /* ── 5. MASTHEAD (Logo + Title) ────────────────────────── */
 .masthead {
-  background: var(--white);
+  background: linear-gradient(135deg, #e8f0fe 0%, #dae8f7 60%, #cddcf0 100%);
+  /* background: var(--white); */
   border-bottom: 3px solid var(--black);
   padding: 10px 0;
 }
