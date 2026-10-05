@@ -133,3 +133,4 @@ LOGOUT_REDIRECT_URL = '/'
 # ── File upload size limit (10 MB) ────────────────────────────────────────────
 DATA_UPLOAD_MAX_MEMORY_SIZE = 10 * 1024 * 1024
 FILE_UPLOAD_MAX_MEMORY_SIZE = 10 * 1024 * 1024
+

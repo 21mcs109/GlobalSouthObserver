@@ -82,9 +82,60 @@
     <!-- ══ AUTHOR BAR ════════════════════════════════════════════════════════════ -->
     <div class="author-bar">
       <div class="author-bar-inner">
+        <div class="topbar-left">
+          <span
+            ><i class="bi bi-envelope-fill"></i>
+            contactglobalsouthobserver@gmail.com</span
+          >
+        </div>
+        
         <span class="ist-clock" id="ist-clock"
           ><i class="bi bi-clock"></i> Loading IST…</span
         >
+        <div class="topbar-social">
+          <a
+            href="https://www.facebook.com/"
+            target="_blank"
+            rel="noopener"
+            aria-label="Facebook"
+            ><i class="bi bi-facebook"></i
+          ></a>
+          <a
+            href="https://www.youtube.com/@GlobalSouthObserver-z4y"
+            target="_blank"
+            rel="noopener"
+            aria-label="YouTube"
+            ><i class="bi bi-youtube"></i
+          ></a>
+          <a
+            href="https://www.linkedin.com/groups/40128007/"
+            target="_blank"
+            rel="noopener"
+            aria-label="LinkedIn"
+            ><i class="bi bi-linkedin"></i
+          ></a>
+          <a
+            href="https://www.instagram.com/globalsouthobserver/"
+            target="_blank"
+            rel="noopener"
+            aria-label="Instagram"
+            ><i class="bi bi-instagram"></i
+          ></a>
+          <a
+            href="https://x.com/globalsouthobsr"
+            target="_blank"
+            rel="noopener"
+            aria-label="X/Twitter"
+            ><i class="bi bi-twitter-x"></i
+          ></a>
+          <a
+            href="https://chat.whatsapp.com/C6cLmw72c8KI2cx3gUOkaT"
+            target="_blank"
+            rel="noopener"
+            aria-label="WhatsApp"
+            ><i class="bi bi-whatsapp"></i
+          ></a>
+        </div>
         <div style="display: flex; align-items: center; gap: 6px">
           {% if request.user.is_authenticated and request.user.author_profile %}
           <span class="hi"
@@ -114,7 +165,7 @@
         </div>
       </div>
     </div>
-
+{% comment %} 
     <!-- ══ TOP INFO BAR ══════════════════════════════════════════════════════════ -->
     <div class="topbar">
       <div class="topbar-inner">
@@ -169,8 +220,8 @@
           ></a>
         </div>
       </div>
-    </div>
-
+    </div> {% endcomment %}
+ 
     <!-- ══ MASTHEAD ══════════════════════════════════════════════════════════════ -->
     <div class="masthead">
       <div class="masthead-inner">
@@ -183,13 +234,13 @@
           />
         </a>
         <div class="masthead-title-area">
-          <h1 class="site-title">
+          <h5 class="site-title">
             <a href="{% url 'home' %}" style="text-decoration: none">
               <span class="t-blue">G</span><span class="t-black">LOBAL </span
               ><span class="t-blue">S</span><span class="t-black">OUTH </span
               ><span class="t-blue">O</span><span class="t-black">BSERVER</span>
             </a>
-          </h1>
+          </h5>
           <p class="site-subtitle">(Voice of Global South)</p>
         </div>
         <div class="masthead-search">

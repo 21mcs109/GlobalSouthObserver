@@ -7,6 +7,7 @@ from django.utils.decorators import method_decorator
 from django.views.generic import TemplateView, ListView
 from django.http import JsonResponse
 from django.utils import timezone
+from .api import fetch_news, fetch_top_headlines, get_category_query, get_fallback_news
 
 from .models import (
     Post, Author, Podcast, Internship, AdvisoryMember, Subscriber
@@ -34,11 +35,15 @@ class HomeView(TemplateView):
 
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
+        news_data = fetch_news('Global South geopolitics diplomacy security', page_size=6)
+        breaking = fetch_top_headlines(page_size=5)
         published = Post.objects.filter(status='published').select_related('author__user')
         ctx['latest_posts']   = published.order_by('-published_at')[:6]
-        ctx['trending_posts'] = published.order_by('-views')[:5]
+        ctx['trending_posts'] = published.order_by('-views')[:11]
         ctx['featured_post']  = published.order_by('-published_at').first()
         ctx['subscribe_form'] = SubscriberForm()
+        ctx['breaking_news'] = breaking.get('articles', [])[:5]
+        ctx['api_success'] = news_data.get('success', False)
         return ctx
 
 
@@ -93,7 +98,13 @@ def news_ajax_view(request):
         'views':        p.views,
     } for p in qs]
     return JsonResponse({'posts': data, 'total': len(data)})
-
+#New added
+def news_api_view(request):
+    category = request.GET.get('category', 'global-south')
+    page = int(request.GET.get('page', 1))
+    query = get_category_query(category)
+    data = fetch_news(query, page=page, page_size=12)
+    return JsonResponse(data)
 
 # ── POST DETAIL ───────────────────────────────────────────────────────────────
 

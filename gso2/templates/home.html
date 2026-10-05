@@ -4,6 +4,23 @@
 
 {% block content %}
 
+ <!-- Breaking News Ticker -->
+
+{% if breaking_news %}
+<div class="breaking-bar" aria-label="Breaking news">
+  <span class="breaking-label"><i class="bi bi-broadcast"></i> Breaking News</span>
+  <div class="ticker-wrap">
+    <div class="ticker">
+      {% for item in breaking_news %}
+      <a href="{{ item.url }}" class="ticker-item" target="_blank" rel="noopener">
+        <i class="bi bi-circle-fill"></i> {{ item.title }}
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endif %}
+
 <!-- ═══════════ HERO CAROUSEL ═══════════ -->
 {% if latest_posts %}
 <section class="hero-carousel" aria-label="Latest posts carousel">
