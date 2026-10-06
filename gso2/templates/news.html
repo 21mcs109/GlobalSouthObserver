@@ -52,7 +52,7 @@
           <h3 class="card-title">
             <a href="{{ post.get_absolute_url }}">{{ post.title|truncatechars:90 }}</a>
           </h3>
-          <p class="card-desc">{{ post.content|truncatechars:130 }}</p>
+          <p class="card-desc">{{ post.content|striptags|truncatechars:130 }}</p>
           <div class="card-meta">
             <span><i class="bi bi-person"></i>
               <a href="{{ post.author.get_absolute_url }}" style="color:var(--blue);">{{ post.author }}</a>

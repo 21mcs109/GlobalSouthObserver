@@ -90,7 +90,7 @@
           <h3 class="card-title">
             <a href="{{ post.get_absolute_url }}">{{ post.title|truncatechars:85 }}</a>
           </h3>
-          <p class="card-desc">{{ post.content|truncatechars:110 }}</p>
+          <p class="card-desc">{{ post.content|striptags|truncatechars:110 }}</p>
           <div class="card-meta">
             <span><i class="bi bi-calendar3"></i> {{ post.published_at|date:"d M Y" }}</span>
             <span><i class="bi bi-eye"></i> {{ post.views }} views</span>

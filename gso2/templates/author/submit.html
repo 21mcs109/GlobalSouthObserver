@@ -1,6 +1,11 @@
 {% extends 'base.html' %}
 {% block title %}{% if editing %}Edit Article{% else %}Submit Article{% endif %}{% endblock %}
 
+{% block extra_css %}
+  <!-- Load TinyMCE media required for the form -->
+  {{ form.media }}
+{% endblock %}
+
 {% block content %}
 <div class="page-hero" style="padding:36px 0 28px;">
   <div class="container">
@@ -74,13 +79,24 @@
             {% if form.keywords.errors %}<div class="field-error">{% for e in form.keywords.errors %}<span>{{ e }}</span>{% endfor %}</div>{% endif %}
           </div>
 
-          <div class="form-group">
+          {% comment %} <div class="form-group">
             <label class="form-label">Full Article *
               <small style="font-weight:400;color:var(--mid-gray);">(minimum 200 words, 1200–2000 words recommended)</small>
             </label>
             {{ form.content }}
             {% if form.content.errors %}<div class="field-error">{% for e in form.content.errors %}<span>{{ e }}</span>{% endfor %}</div>{% endif %}
             <div style="text-align:right;font-family:var(--font-ui);font-size:.72rem;color:var(--mid-gray);margin-top:4px;" id="word-count">0 words</div>
+          </div> {% endcomment %}
+          <div class="form-group">
+            <label class="form-label">Full Article *
+              <small style="font-weight:400;color:var(--mid-gray);">(minimum 200 words, 1200–2000 words recommended)</small>
+            </label>
+            <!-- TinyMCE will automatically attach to this field -->
+            {{ form.content }}
+            {% if form.content.errors %}<div class="field-error">{% for e in form.content.errors %}<span>{{ e }}</span>{% endfor %}</div>{% endif %}
+            
+            <!-- Removed the custom word count JS below because TinyMCE handles content inside an iframe, 
+                 making standard textarea input listeners fail. -->
           </div>
 
           {% if form.non_field_errors %}
@@ -144,7 +160,7 @@
 {% endblock %}
 
 {% block extra_js %}
-<script>
+{% comment %} <script>
   // Live word count
   const content = document.querySelector('textarea[name="content"]');
   const counter = document.getElementById('word-count');
@@ -157,5 +173,5 @@
     content.addEventListener('input', updateCount);
     updateCount();
   }
-</script>
+</script> {% endcomment %}
 {% endblock %}

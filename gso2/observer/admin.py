@@ -1,6 +1,8 @@
 from django.contrib import admin
 from django.utils import timezone
 from django.utils.html import format_html
+from django import forms              
+from tinymce.widgets import TinyMCE
 from .models import (
     AuthorGroup, Author, Post,
     Subscriber, ContactMessage, Podcast,
@@ -68,9 +70,38 @@ class AuthorAdmin(admin.ModelAdmin):
 
 
 # ── POST ──────────────────────────────────────────────────────────────────────
-
+class PostAdminForm(forms.ModelForm):
+    content = forms.CharField(widget=TinyMCE(attrs={'cols': 80, 'rows': 30}))
+    
+    class Meta:
+        model = Post
+        fields = '__all__'
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
+    form = PostAdminForm
+    # list_display  = ['title', 'author_name', 'category', 'status_badge',
+    #                   'views', 'created_at', 'published_at']
+    # list_filter   = ['status', 'category', 'created_at']
+    # search_fields = ['title', 'author__user__username', 'author__user__first_name',
+    #                   'keywords', 'content']
+    # readonly_fields = ['slug', 'views', 'created_at', 'updated_at']
+    # ordering      = ['-created_at']
+    # actions       = ['publish_posts', 'reject_posts']
+
+    # fieldsets = (
+    #     ('Post Info', {
+    #         'fields': ('title', 'slug', 'author', 'category', 'image', 'keywords')
+    #     }),
+    #     ('Content', {'fields': ('content',)}),
+    #     ('Status', {
+    #         'fields': ('status', 'published_at', 'rejection_reason')
+    #     }),
+    #     ('Stats', {
+    #         'fields': ('views', 'created_at', 'updated_at'),
+    #         'classes': ('collapse',)
+    #     }),
+    # )
+
     list_display  = ['title', 'author_name', 'category', 'status_badge',
                       'views', 'created_at', 'published_at']
     list_filter   = ['status', 'category', 'created_at']

@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     'observer',
     'cloudinary_storage',
     'cloudinary',   
+    'tinymce',
 ]
 
 MIDDLEWARE = [
@@ -134,3 +135,11 @@ LOGOUT_REDIRECT_URL = '/'
 DATA_UPLOAD_MAX_MEMORY_SIZE = 10 * 1024 * 1024
 FILE_UPLOAD_MAX_MEMORY_SIZE = 10 * 1024 * 1024
 
+# TinyMCE Configuration
+TINYMCE_DEFAULT_CONFIG = {
+    'height': 500,
+    'width': '100%',
+    'menubar': False,
+    'toolbar': 'undo redo | formatselect | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat',
+    'plugins': 'lists advlist',
+}

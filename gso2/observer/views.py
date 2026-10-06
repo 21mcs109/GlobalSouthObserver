@@ -42,7 +42,7 @@ class HomeView(TemplateView):
         ctx['trending_posts'] = published.order_by('-views')[:11]
         ctx['featured_post']  = published.order_by('-published_at').first()
         ctx['subscribe_form'] = SubscriberForm()
-        ctx['breaking_news'] = breaking.get('articles', [])[:5]
+        ctx['breaking_news'] = breaking.get('articles', [])[:5] 
         ctx['api_success'] = news_data.get('success', False)
         return ctx
 

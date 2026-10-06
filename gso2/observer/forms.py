@@ -1,5 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
+from tinymce.widgets import TinyMCE
 from .models import (
     Subscriber, ContactMessage, ResearchApplication,
     Author, Post
@@ -79,6 +80,10 @@ class AuthorLoginForm(forms.Form):
 # ── POST SUBMISSION ───────────────────────────────────────────────────────────
 
 class PostSubmissionForm(forms.ModelForm):
+    content = forms.CharField(
+        widget=TinyMCE(attrs={'cols': 80, 'rows': 20, 'placeholder': 'Write your full article here...'}),
+        label="Full Article *"
+    )
     class Meta:
         model  = Post
         fields = ['title','category','image','keywords','content']
@@ -87,7 +92,7 @@ class PostSubmissionForm(forms.ModelForm):
             'category': forms.Select(attrs={'class':'form-control'}),
             'image':    forms.FileInput(attrs={'class':'form-control','accept':'image/*'}),
             'keywords': forms.TextInput(attrs={'class':'form-control','placeholder':'e.g. diplomacy, BRICS, India, geopolitics (comma separated)'}),
-            'content':  forms.Textarea(attrs={'class':'form-control','placeholder':'Write your full article here...','rows':18}),
+            # 'content':  forms.Textarea(attrs={'class':'form-control','placeholder':'Write your full article here...','rows':18}),
         }
 
     def clean_title(self):
