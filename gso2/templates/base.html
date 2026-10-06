@@ -75,6 +75,80 @@
         color: rgba(255, 255, 255, 0.5);
         font-size: 0.7rem;
       }
+      /* Base styles for the author bar (desktop first) */
+.author-bar {
+  background: #1a1a1a;
+  border-bottom: 1px solid #333;
+  padding: 8px 0; /* Slightly increased padding for better touch targets */
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+}
+
+.author-bar-inner {
+  width: min(1200px, 100% - 2rem);
+  margin-inline: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap; /* Allow wrapping if needed */
+}
+
+/* ... (keep your existing .author-bar a, .sep, .hi, .btn-author, .btn-reg styles) ... */
+
+/* ── Mobile Layout Adjustments ── */
+@media (max-width: 768px) {
+  .author-bar-inner {
+    flex-direction: column; /* Stack elements vertically */
+    align-items: center;    /* Center align everything */
+    gap: 8px;
+  }
+
+  /* Hide the email address on mobile to save space (optional, but recommended) */
+  .topbar-left {
+    display: none; 
+  }
+
+  /* Or, if you want to keep the email but center it:
+  .topbar-left {
+    width: 100%;
+    text-align: center;
+  } 
+  */
+
+  /* Center the social icons */
+  .topbar-social {
+    display: none;
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
+    margin-bottom: 4px;
+  }
+  
+  /* Make social icons slightly larger for touch */
+  .topbar-social a {
+      font-size: 1rem; 
+  }
+
+  /* Adjust the auth links container */
+  .author-bar-inner > div:last-child {
+    flex-wrap: wrap;       /* Allow auth links to wrap to multiple lines if needed */
+    justify-content: center;
+    width: 100%;
+    line-height: 2;        /* Add vertical space between wrapped links */
+  }
+
+  /* Hide the "Welcome, Name" text on very small screens to save space */
+  @media (max-width: 480px) {
+      .author-bar .hi {
+          display: none;
+      }
+      /* Hide the first separator if we hide the welcome message */
+      .author-bar .hi + .sep {
+          display: none;
+      }
+  }
+}
     </style>
     {% block extra_css %}{% endblock %}
   </head>
