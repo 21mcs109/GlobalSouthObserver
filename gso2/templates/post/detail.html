@@ -11,7 +11,7 @@
          style="background:var(--blue);color:#fff;font-family:var(--font-ui);font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;padding:4px 12px;">
         {{ post.get_category_display }}
       </a>
-      <span style="font-family:var(--font-ui);font-size:.75rem;color:rgba(255,255,255,.5);">
+      <span style="font-family:var(--font-ui);font-size:.75rem;color:blue;">
         <i class="bi bi-calendar3"></i> {{ post.published_at|date:"d F Y" }}
         &nbsp;&bull;&nbsp;
         <i class="bi bi-eye"></i> {{ post.views }} views
@@ -30,8 +30,8 @@
         </div>
         {% endif %}
         <div>
-          <div style="font-family:var(--font-ui);font-weight:700;color:#fff;font-size:.85rem;">{{ post.author }}</div>
-          <div style="font-family:var(--font-ui);font-size:.72rem;color:rgba(255,255,255,.5);">{{ post.author.published_count }} articles published</div>
+          <div style="font-family:var(--font-ui);font-weight:700;color:blue;font-size:.85rem;">{{ post.author }}</div>
+          <div style="font-family:var(--font-ui);font-size:.72rem;color:blue;">{{ post.author.published_count }} articles published</div>
         </div>
       </a>
     </div>
