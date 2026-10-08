@@ -1,7 +1,21 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block title %}Home{% endblock %}
+{% block extra_css %}
+<style>
+  /* Base speed for desktop (lower seconds = faster speed) */
+  .ticker {
+    animation-duration: 18s !important; 
+  }
 
+  /* Faster speed specifically for mobile devices */
+  @media (max-width: 768px) {
+    .ticker {
+      animation-duration: 10s !important; 
+    }
+  }
+</style>
+{% endblock %}
 {% block content %}
 
  <!-- Breaking News Ticker -->

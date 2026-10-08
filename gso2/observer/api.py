@@ -74,6 +74,47 @@ def fetch_top_headlines(page_size=4):
     except Exception:
         return get_fallback_news('global news')
 
+# For Indian News
+# def fetch_top_headlines(page_size=4):
+#     api_key = settings.NEWS_API_KEY
+#     if not api_key or api_key == 'your_newsapi_key_here':
+#         return get_fallback_news('global news')
+#     try:
+#         url = f"{settings.NEWS_API_BASE_URL}everything"
+#         params = {
+#             'q': 'India',
+#             # 'domains': 'aajtak.in, ndtv.com, indiatoday.in,thehindu.com,timesofindia.indiatimes.com,indianexpress.com',
+#             'apiKey': api_key, 
+#             'language': 'en',
+#             'sortBy': 'publishedAt',
+#             'pageSize': page_size,
+#         }
+#         r = requests.get(url, params=params, timeout=10)
+#         r.raise_for_status()
+#         data = r.json()
+        
+#         # Ensure status is 'ok' AND that it actually found articles
+#         if data.get('status') == 'ok' and len(data.get('articles', [])) > 0:
+#             articles = []
+#             for a in data.get('articles', []):
+#                 if a.get('title') and a.get('title') != '[Removed]':
+#                     articles.append({
+#                         'title': a.get('title', ''),
+#                         'description': a.get('description', '') or '',
+#                         'url': a.get('url', '#'),
+#                         'image': a.get('urlToImage') or '/static/images/news-placeholder.svg',
+#                         'source': a.get('source', {}).get('name', 'Unknown'),
+#                         'author': a.get('author', '') or 'GSO Staff',
+#                         'published_at': a.get('publishedAt', ''),
+#                     })
+#             return {'articles': articles, 'success': True}
+        
+#         # If no articles were found, fallback so the ticker doesn't disappear
+#         return get_fallback_news('global news')
+#     except Exception:
+#         return get_fallback_news('global news')
+
+
 def get_category_query(category):
     return CATEGORY_QUERIES.get(category, 'Global South geopolitics diplomacy')
 

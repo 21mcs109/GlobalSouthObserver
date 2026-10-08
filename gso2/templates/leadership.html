@@ -38,9 +38,45 @@
     </div>
   </section>
 
-  <section class="content-section" id="editorial">
+  {% comment %} <section class="content-section" id="editorial">
     <h2>Editorial Board</h2>
     <p>The Global South Observer Editorial Board comprises experienced academics, journalists, policy analysts, and subject-matter experts who oversee the quality, accuracy, and integrity of all published content. The editorial team ensures that all submissions meet our rigorous standards of scholarship, originality, and analytical depth.</p>
+    <div class="info-box">
+      <h4>Editorial Guidelines</h4>
+      <p>The GSO seeks well-written scholarly work, commentaries, and opinions with critical and analytical perspectives on recent events in international relations, geopolitics, security, military strategic affairs, public policy, SDGs, philosophy, science, entertainment, healthcare, biodiversity, and more.</p>
+    </div>
+    <h3>Submission Guidelines</h3>
+    <ul>
+      <li>Articles should be <strong>around 1200 to 2000 words</strong>, line space 1.5, writing style in Times New Roman, original, topical, and informed by primary qualitative and quantitative data.</li>
+      <li>Authors may forward their <strong>80 words research affiliation</strong> and passport photo along with their separate article written in word file.</li>
+      <li>Pieces must be written in an <strong>analytical and critical style</strong> and include references, bibliographies and hyperlinked citations for all important claims.</li>
+      <li>GSO <strong>does not permit</strong> the use of generative Artificial Intelligence (AI) to assist with the content or writing. Ideas, writing, and citations must be your own.</li>
+      <li>Articles should comply with the copyright regulations of India and be <strong>free from plagiarism</strong>.</li>
+      <li>Submit to: <a href="mailto:contactglobalsouthobserver@gmail.com">contactglobalsouthobserver@gmail.com</a></li>
+    </ul>
+    <a href="{% url 'contact' %}#write-for-us" class="btn-primary" style="margin-top:16px;display:inline-flex;"><i class="bi bi-pencil-square"></i> Write for Us</a>
+  </section> {% endcomment %}
+<section class="content-section" id="editorial">
+    <h2>Editorial Board</h2>
+    <p>The Global South Observer Editorial Board comprises experienced academics, journalists, policy analysts, and subject-matter experts who oversee the quality, accuracy, and integrity of all published content. The editorial team ensures that all submissions meet our rigorous standards of scholarship, originality, and analytical depth.</p>
+    
+    <!-- Dynamic Editorial Cards -->
+    {% if editorial_members %}
+    <div class="three-col" style="margin-top:28px; margin-bottom:32px;">
+      {% for member in editorial_members %}
+      <div class="service-card" data-animate style="text-align:center;">
+        <img src="{{ member.get_photo }}" alt="{{ member.name }}" style="width:80px;height:80px;border-radius:50%;margin:0 auto 12px;border:3px solid var(--blue);display: block;" onerror="this.src='/static/images/default-avatar.svg'"/>
+        <h3 style="font-size:.95rem;">{{ member.name }}</h3>
+        <p style="color:var(--blue);font-size:.78rem;font-weight:700;font-family:var(--font-ui);margin-bottom:4px;">{{ member.designation }}</p>
+        <p style="font-size:.75rem;color:var(--mid-gray);margin-bottom:8px;">{{ member.institution }}</p>
+        {% if member.expertise %}
+        <span style="display:inline-block;background:var(--blue-pale);color:var(--blue);font-size:.7rem;padding:3px 10px;font-family:var(--font-ui);">{{ member.expertise }}</span>
+        {% endif %}
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+
     <div class="info-box">
       <h4>Editorial Guidelines</h4>
       <p>The GSO seeks well-written scholarly work, commentaries, and opinions with critical and analytical perspectives on recent events in international relations, geopolitics, security, military strategic affairs, public policy, SDGs, philosophy, science, entertainment, healthcare, biodiversity, and more.</p>
@@ -64,7 +100,7 @@
     <div class="three-col" style="margin-top:28px;">
       {% for member in advisory_members %}
       <div class="service-card" data-animate style="text-align:center;">
-        <img src="{{ member.get_photo }}" alt="{{ member.name }}" style="width:80px;height:80px;object-fit:cover;border-radius:50%;margin:0 auto 12px;border:3px solid var(--blue);" onerror="this.src='/static/images/default-avatar.svg'"/>
+        <img src="{{ member.get_photo }}" alt="{{ member.name }}" style="width:80px;height:80px;border-radius:50%;margin:0 auto 12px;border:3px solid var(--blue);display: block;" onerror="this.src='/static/images/default-avatar.svg'"/>
         <h3 style="font-size:.95rem;">{{ member.name }}</h3>
         <p style="color:var(--blue);font-size:.78rem;font-weight:700;font-family:var(--font-ui);margin-bottom:4px;">{{ member.designation }}</p>
         <p style="font-size:.75rem;color:var(--mid-gray);margin-bottom:8px;">{{ member.institution }}</p>

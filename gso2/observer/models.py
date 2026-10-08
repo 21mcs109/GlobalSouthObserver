@@ -230,3 +230,27 @@ class AdvisoryMember(models.Model):
         if self.photo_url:
             return self.photo_url
         return '/static/images/default-avatar.svg'
+
+class EditorialMember(models.Model):
+    name = models.CharField(max_length=200)
+    designation = models.CharField(max_length=300)
+    institution = models.CharField(max_length=300)
+    expertise = models.CharField(max_length=300, blank=True, help_text="E.g., Geopolitics, Public Policy")
+    biography = models.TextField()
+    photo = models.ImageField(upload_to='editorial/', blank=True, null=True)
+    photo_url = models.URLField(blank=True)
+    order = models.PositiveIntegerField(default=0)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['order', 'name']
+
+    def __str__(self):
+        return self.name
+
+    def get_photo(self):
+        if self.photo:
+            return self.photo.url
+        if self.photo_url:
+            return self.photo_url
+        return '/static/images/default-avatar.svg'

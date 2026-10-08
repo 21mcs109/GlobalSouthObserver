@@ -10,7 +10,7 @@ from django.utils import timezone
 from .api import fetch_news, fetch_top_headlines, get_category_query, get_fallback_news
 
 from .models import (
-    Post, Author, Podcast, Internship, AdvisoryMember, Subscriber
+    Post, Author, Podcast, Internship, AdvisoryMember, Subscriber, EditorialMember
 )
 from .forms import (
     SubscriberForm, ContactForm, ResearchApplicationForm,
@@ -290,6 +290,7 @@ class LeadershipView(TemplateView):
             {'id':'fellows',   'label':'Research Fellows'},
         ]
         ctx['advisory_members'] = AdvisoryMember.objects.all()
+        ctx['editorial_members'] = EditorialMember.objects.all()
         return ctx
 
 class InternshipsView(TemplateView):

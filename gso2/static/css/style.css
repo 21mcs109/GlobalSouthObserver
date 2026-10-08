@@ -281,7 +281,15 @@ button { cursor: pointer; font-family: var(--font-ui); border: none; }
   background: var(--blue-dark);
   border-bottom-color: var(--white);
 }
-
+/* ── Sticky Sub-Navbar Mobile Fix ── */
+@media (max-width: 768px) {
+  .sub-navbar {
+    /* If your main mobile navbar is sticky and 60px tall, use 60px. */
+    /* If your main mobile navbar scrolls out of view, change this to 0px. */
+    top: 40px !important; 
+    z-index: 99; 
+  }
+}
 /* ── 8. BREAKING NEWS TICKER ───────────────────────────── */
 .breaking-bar {
   background: var(--blue);
