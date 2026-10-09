@@ -3,6 +3,26 @@
 {% block title %}{{ post.title }}{% endblock %}
 {% block meta_description %}{{ post.content|striptags|truncatechars:160 }}{% endblock %}
 
+{% block extra_css %}
+<style>
+  /* Desktop Layout */
+  .post-detail-layout {
+    display: grid;
+    grid-template-columns: 1fr 280px;
+    gap: 40px;
+    align-items: start;
+  }
+
+  /* Mobile Layout */
+  @media (max-width: 992px) {
+    .post-detail-layout {
+      grid-template-columns: 1fr; /* This forces a single column */
+      gap: 32px;
+    }
+  }
+</style>
+{% endblock %}
+
 {% block content %}
 <div class="page-hero" style="padding:40px 0 30px;">
   <div class="container">
@@ -40,8 +60,8 @@
 
 <section class="section" style="padding-top:40px;">
   <div class="container">
-    <div style="display:grid;grid-template-columns:1fr 280px;gap:40px;align-items:start;">
-
+    {% comment %} <div style="display:grid;grid-template-columns:1fr 280px;gap:40px;align-items:start;"> {% endcomment %}
+    <div class="post-detail-layout">
       <!-- Article content -->
       <article>
         <!-- Featured image -->
