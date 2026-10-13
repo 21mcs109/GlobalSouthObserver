@@ -89,6 +89,7 @@ class Post(models.Model):
     author           = models.ForeignKey(Author, on_delete=models.CASCADE, related_name='posts')
     category         = models.CharField(max_length=50, choices=CATEGORY_CHOICES)
     image            = models.ImageField(upload_to='posts/%Y/%m/')
+    image_credit     = models.CharField(max_length=300, blank=True, help_text="Credit for the featured image (e.g., Photo by John Doe / Getty Images)")
     keywords         = models.CharField(max_length=500, help_text='Comma-separated keywords')
     content          = models.TextField()
     status           = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending')
@@ -238,6 +239,29 @@ class EditorialMember(models.Model):
     expertise = models.CharField(max_length=300, blank=True, help_text="E.g., Geopolitics, Public Policy")
     biography = models.TextField()
     photo = models.ImageField(upload_to='editorial/', blank=True, null=True)
+    photo_url = models.URLField(blank=True)
+    order = models.PositiveIntegerField(default=0)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['order', 'name']
+
+    def __str__(self):
+        return self.name
+
+    def get_photo(self):
+        if self.photo:
+            return self.photo.url
+        if self.photo_url:
+            return self.photo_url
+        return '/static/images/default-avatar.svg'
+
+class Founder(models.Model):
+    name = models.CharField(max_length=200)
+    designation = models.CharField(max_length=300, help_text="E.g., Founder & Editor-in-Chief")
+    institution = models.CharField(max_length=300, blank=True)
+    biography = models.TextField()
+    photo = models.ImageField(upload_to='founders/', blank=True, null=True)
     photo_url = models.URLField(blank=True)
     order = models.PositiveIntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)

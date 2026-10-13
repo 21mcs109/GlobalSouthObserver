@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% block title %}Research Publication{% endblock %}
+
+{% block content %}
+<div class="page-hero">
+  <div class="container">
+    <h1 class="page-hero-title"><span>Research</span> Publication</h1>
+    <p class="page-hero-subtitle">Journal of Global South Quarterly &bull; Monographs &bull; Books &bull; Articles &bull; Commentaries</p>
+  </div>
+</div>
+
+<!-- Sub-navbar -->
+<nav class="sub-navbar" aria-label="Research Publication sections">
+  <div class="sub-navbar-inner">
+    {% for sec in research_sections %}
+    <button class="sub-nav-btn {% if forloop.first %}active{% endif %}" data-target="{{ sec.id }}">{{ sec.label }}</button>
+    {% endfor %}
+  </div>
+</nav>
+
+<div class="container">
+
+  <!-- JOURNAL -->
+  <section class="content-section" id="journal">
+    <h2>Journal of Global South Quarterly</h2>
+    <p>Welcome to the Journal of Global South Quarterly. This section features peer-reviewed academic papers, rigorous research, and comprehensive studies focusing on international relations, geopolitics, security, and socio-economic developments across the Global South.</p>
+    <div class="info-box" style="margin-top:20px;">
+      <h4>Call for Papers</h4>
+      <p>We invite academicians and researchers to submit their original papers for our upcoming quarterly issue. Submissions must adhere to our strict academic guidelines and peer-review process.</p>
+    </div>
+  </section>
+
+  <!-- MONOGRAPHS -->
+  <section class="content-section" id="monographs">
+    <h2>Monographs</h2>
+    <p>Our Monographs section provides deep, book-length studies on specialized topics by leading experts and researchers. These detailed texts offer comprehensive analysis on specific geopolitical events, policy shifts, and regional security dynamics.</p>
+  </section>
+
+  <!-- BOOKS -->
+  <section class="content-section" id="books">
+    <h2>BOOKS</h2>
+    <p>Explore books published by our network of authors, founding members, and affiliated researchers. We cover a wide array of topics including modern warfare, public policy, environmental sustainability, and regional diplomacy.</p>
+  </section>
+
+  <!-- RESEARCH ARTICLES -->
+  <section class="content-section" id="research-articles">
+    <h2>Research Articles</h2>
+    <p>Discover in-depth research articles contributing to the academic discourse on issues affecting Africa, Asia, Latin America, and the broader developing world. Our articles rely on primary qualitative and quantitative data to build new narratives.</p>
+    <a href="{% url 'news' %}" class="btn-primary" style="margin-top:16px;display:inline-flex;"><i class="bi bi-journal-text"></i> Browse Latest Articles</a>
+  </section>
+
+  <!-- COMMENTARIES -->
+  <section class="content-section" id="commentaries">
+    <h2>Commentaries</h2>
+    <p>Read critical commentaries and opinion pieces by our network of scholars, retired civil servants, and industry experts. These pieces offer timely analysis and critical perspectives on breaking events and policy shifts in the Global South.</p>
+  </section>
+
+</div>
+{% endblock %}

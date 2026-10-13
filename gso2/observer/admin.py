@@ -6,7 +6,7 @@ from tinymce.widgets import TinyMCE
 from .models import (
     AuthorGroup, Author, Post,
     Subscriber, ContactMessage, Podcast,
-    Internship, LeadershipApplication, ResearchApplication, AdvisoryMember,EditorialMember
+    Internship, LeadershipApplication, ResearchApplication, AdvisoryMember,EditorialMember, Founder
 )
 
 admin.site.site_header  = "Global South Observer Admin"
@@ -113,7 +113,7 @@ class PostAdmin(admin.ModelAdmin):
 
     fieldsets = (
         ('Post Info', {
-            'fields': ('title', 'slug', 'author', 'category', 'image', 'keywords')
+            'fields': ('title', 'slug', 'author', 'category', 'image', 'image_credit','keywords')
         }),
         ('Content', {'fields': ('content',)}),
         ('Status', {
@@ -202,4 +202,10 @@ class AdvisoryMemberAdmin(admin.ModelAdmin):
 class EditorialMemberAdmin(admin.ModelAdmin):
     list_display  = ['name', 'designation', 'institution', 'order']
     search_fields = ['name', 'institution', 'expertise']
+    ordering      = ['order', 'name']
+
+@admin.register(Founder)
+class FounderAdmin(admin.ModelAdmin):
+    list_display  = ['name', 'designation', 'order']
+    search_fields = ['name', 'designation', 'biography']
     ordering      = ['order', 'name']

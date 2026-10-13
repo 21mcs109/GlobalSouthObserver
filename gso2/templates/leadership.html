@@ -19,7 +19,7 @@
 
 <div class="container">
 
-  <section class="content-section" id="founder">
+  {% comment %} <section class="content-section" id="founder">
     <h2>Founder Column</h2>
     <div class="two-col">
       <div>
@@ -36,6 +36,44 @@
         <p style="font-family:var(--font-ui);font-size:.78rem;color:rgba(255,255,255,.5);margin-top:16px;">— GSO Founding Team</p>
       </div>
     </div>
+  </section> {% endcomment %}
+
+  <section class="content-section" id="founder">
+    <h2>Founder Column</h2>
+    <div class="two-col" style="margin-bottom: 40px;">
+      <div>
+        <p>Global South Observer was established with a vision to create an independent, non-partisan platform for research, analysis, and dialogue on issues affecting the Global South. The founding team comprises distinguished academicians, retired civil servants, industrialists, and senior community members committed to advancing new narratives for the developing world.</p>
+        <p>Our founders believe that the Global South — encompassing more than 130 nations across Africa, Asia, Latin America, and Oceania — must have a robust, research-backed voice in global discourse. Through rigorous scholarship, evidence-based analysis, and inclusive dialogue, we seek to bridge the gap between academia and policy-making.</p>
+        <div class="info-box" style="margin-top:20px;">
+          <h4>Founding Vision</h4>
+          <p>To build a repository of shared knowledge and wisdom on the Global South region, promoting the research work of young researchers, early academicians, civil servants, entrepreneurs, and senior community members.</p>
+        </div>
+      </div>
+      <div style="background:var(--black);padding:32px;border-top:4px solid var(--blue);height:fit-content;">
+        <div class="section-label" style="color:rgba(255,255,255,.7);border-color:var(--blue-light);margin-bottom:16px;"><i class="bi bi-quote"></i> Founding Principle</div>
+        <blockquote style="font-family:var(--font-body);font-size:1.1rem;color:var(--white);line-height:1.7;font-style:italic;">"The Global South deserves a world-class platform that amplifies its voices, showcases its scholarship, and shapes global narratives from within."</blockquote>
+        <p style="font-family:var(--font-ui);font-size:.78rem;color:rgba(255,255,255,.5);margin-top:16px;">— GSO Founding Team</p>
+      </div>
+    </div>
+
+    <!-- Dynamic Founder Cards -->
+    {% if founders %}
+    <div class="three-col">
+      {% for member in founders %}
+      <div class="service-card" data-animate style="text-align:center;">
+        <img src="{{ member.get_photo }}" alt="{{ member.name }}" style="width:100px;height:100px;object-fit:cover;border-radius:50%;margin:0 auto 12px;border:3px solid var(--blue);" onerror="this.src='/static/images/default-avatar.svg'"/>
+        <h3 style="font-size:1.05rem; margin-bottom:4px;">{{ member.name }}</h3>
+        <p style="color:var(--blue);font-size:.82rem;font-weight:700;font-family:var(--font-ui);margin-bottom:8px;">{{ member.designation }}</p>
+        
+        {% if member.institution %}
+        <p style="font-size:.75rem;color:var(--mid-gray);margin-bottom:12px;">{{ member.institution }}</p>
+        {% endif %}
+        
+        <p style="font-size:.85rem;color:var(--mid-gray);line-height:1.6;text-align:justify;hyphens:auto;">{{ member.biography }}</p>
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
   </section>
 
   {% comment %} <section class="content-section" id="editorial">

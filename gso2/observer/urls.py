@@ -7,6 +7,7 @@ urlpatterns = [
     path('about/', views.AboutView.as_view(), name='about'),
     path('news/', views.NewsView.as_view(), name='news'),
     path('news/ajax/', views.news_ajax_view, name='news_ajax'),
+    path('research-publication/', views.ResearchPublicationView.as_view(), name='research_publication'),
     path('leadership/', views.LeadershipView.as_view(), name='leadership'),
     path('internships/', views.InternshipsView.as_view(), name='internships'),
     path('political-consultancy/', views.PoliticalView.as_view(), name='political'),

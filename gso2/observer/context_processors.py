@@ -38,6 +38,17 @@ def site_context(request):
                     {'name': 'Arctic & North America', 'url': 'news', 'anchor': '?category=arctic-north-america'},
                 ]
             },
+            # ── NEW SECTION ADDED HERE ──
+            # ── UPDATED SECTION ──
+            {
+                'name': 'Research Publication', 'url': 'research_publication', 'subs': [
+                    {'name': 'Journal of Global South Quarterly', 'url': 'research_publication', 'anchor': '#journal'},
+                    {'name': 'Monographs', 'url': 'research_publication', 'anchor': '#monographs'},
+                    {'name': 'BOOKS', 'url': 'research_publication', 'anchor': '#books'},
+                    {'name': 'Research Articles', 'url': 'research_publication', 'anchor': '#research-articles'},
+                    {'name': 'Commentaries', 'url': 'research_publication', 'anchor': '#commentaries'},
+                ]
+            },
             {
                 'name': 'Research Internship', 'url': 'internships', 'subs': [
                     {'name': 'Certificate Courses', 'url': 'internships', 'anchor': '#certificate'},

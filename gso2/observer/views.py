@@ -10,7 +10,7 @@ from django.utils import timezone
 from .api import fetch_news, fetch_top_headlines, get_category_query, get_fallback_news
 
 from .models import (
-    Post, Author, Podcast, Internship, AdvisoryMember, Subscriber, EditorialMember
+    Post, Author, Podcast, Internship, AdvisoryMember, Subscriber, EditorialMember, Founder
 )
 from .forms import (
     SubscriberForm, ContactForm, ResearchApplicationForm,
@@ -278,7 +278,19 @@ class AboutView(TemplateView):
             {'id':'subscription','label':'Subscription & Refund Policy'},
         ]
         return ctx
-
+class ResearchPublicationView(TemplateView):
+    template_name = 'research_publication.html'
+    
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        ctx['research_sections'] = [
+            {'id':'journal',           'label':'Journal of Global South Quarterly'},
+            {'id':'monographs',        'label':'Monographs'},
+            {'id':'books',             'label':'BOOKS'},
+            {'id':'research-articles', 'label':'Research Articles'},
+            {'id':'commentaries',      'label':'Commentaries'},
+        ]
+        return ctx
 class LeadershipView(TemplateView):
     template_name = 'leadership.html'
     def get_context_data(self, **kwargs):
@@ -291,6 +303,7 @@ class LeadershipView(TemplateView):
         ]
         ctx['advisory_members'] = AdvisoryMember.objects.all()
         ctx['editorial_members'] = EditorialMember.objects.all()
+        ctx['founders'] = Founder.objects.all()
         return ctx
 
 class InternshipsView(TemplateView):
@@ -386,3 +399,5 @@ class TermsView(TemplateView):
 
 def custom_404(request, exception):
     return render(request, '404.html', status=404)
+
+
