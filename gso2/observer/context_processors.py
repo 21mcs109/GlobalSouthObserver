@@ -50,14 +50,14 @@ def site_context(request):
                 ]
             },
             {
-                'name': 'Research Internship', 'url': 'internships', 'subs': [
+                'name': 'Internship', 'url': 'internships', 'subs': [
                     {'name': 'Certificate Courses', 'url': 'internships', 'anchor': '#certificate'},
                     {'name': 'Leadership Programs', 'url': 'internships', 'anchor': '#leadership-programs'},
                     {'name': 'Seminars, Workshops & Conferences', 'url': 'internships', 'anchor': '#seminars'},
                 ]
             },
             {
-                'name': 'Political Consultancy', 'url': 'political', 'subs': [
+                'name': 'Consultancy', 'url': 'political', 'subs': [
                     {'name': 'Political Research & Public Opinion', 'url': 'political', 'anchor': '#research'},
                     {'name': 'Social Media & Political Communication', 'url': 'political', 'anchor': '#social-media'},
                     {'name': 'Election Strategy & Campaigns', 'url': 'political', 'anchor': '#election'},
